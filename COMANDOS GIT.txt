@@ -2,4 +2,4 @@ git add .
 git commit -m "mensaje de actualziacion"
 git push
 git log --oneline
-git reset hard a98324
+git reset --hard a98324     
