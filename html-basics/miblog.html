@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<!-- CABEZA(DONDE TITULO ES EL UNICO VISIBLE) -->
+
+<head>
+    <!-- ETIQUETAS  -->
+    <!-- codificacion de caracteres -->
+    <meta charset="utf-8" />
+    <title>Mi blog</title>
+    <!-- la etiqueta meta tiene una tributo name y content -->
+    <meta name="description" content="esta es mi primer pagina web" />
+    <meta name="author" content="DIEGO SOTO L." />
+    <!-- las palabras claves ayudan en la busqueda del sitio web -->
+    <meta name="keywords" content="primera, pagina, primera apgina web" />
+
+    <!-- se utiliza la etiqueta style para determinar los estilos de la pagina web -->
+    <!-- color cambia el color de las letras y background el color del fondo de la seccion -->
+
+    <link rel="stylesheet" href="estilos.css">
+
+</head>
+
+<!-- CUERPO -->
+
+<body>
+    <!-- cabezera -->
+    <header class="green">
+        <h1>Mi blog</h1>
+    </header>
+    <!-- navegacion -->
+    <nav>
+        <!-- lista desordenada -->
+        <ul>
+            <!-- li = list item -->
+            <li>Principal</li>
+            <li>Ayuda</li>
+            <li>Contacto</li>
+        </ul>
+    </nav>
+
+    <!-- seccion principal -->
+    <section>
+        <!-- primer articulo -->
+        <article>
+            <!-- se agroupan los titulos del articulos para mantener orden -->
+            <hgroup>
+                <h1>Titulo primer articulo</h1>
+                <h2>subtitulos del primer articulo</h2>
+            </hgroup>
+
+            <time datetime="12/10/2018">Publicado el dia 08/10/2019</time>
+            <p class="green">
+
+                <!-- lorem30 genera parrafo de prueba -->
+                <!-- small cambia el tamaño del texto -->
+                <!-- cite cambia a cursiva y referencia a una cita -->
+                <!-- span css -->
+                Lorem ipsum dolor sit amet <small>consectetur adipisicing elit.</small> Dolorum, similique maxime!
+                <cite> Dolorum, similique maxime!</cite> Ipsum beatae vel odit, debitis consectetur quae unde, exercitationem quibusdam, <span>impedit corrupti aut hic.</span> Ipsa aliquid deserunt saepe blanditiis.
+            </p>
+            <!-- toma una imagen desde la carpeta images ubicada en la carpetar raiz -->
+            <img src="Images/junaeb.png" alt="">
+            <!-- footer representa el pie de pagina  del articulo -->
+            <footer>
+                <p>
+                    Comentarios(0)
+                </p>
+            </footer>
+            <!-- etiquweta de una direccion de pagina web(cursiva) -->
+            <address>
+                <!-- referencia a una pagina web(hipervinculo) -->
+                <a href="http://google.cl">Enlace a google</a>
+            </address>
+
+        </article>
+        <!-- segundo articulo -->
+        <article id="articulo">
+            <hgroup>
+                <h1>Titulo del segundo archivo</h1>
+                <h2>subtitulos del segundo articulo</h2>
+            </hgroup>
+
+            <time datetime="12/10/2018">Publicado el dia 08/10/2019</time>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, distinctio voluptatibus molestiae at ipsa ipsum ad debitis nulla rerum quam fuga unde, commodi esse. Doloribus nulla amet eos quia mollitia.
+            </p>
+            <footer>
+                <p>
+                    Comentarios(10)
+                </p>
+            </footer>
+        </article>
+    </section>
+
+    <!-- contenido lateral -->
+    <aside>
+        <!-- cita de un libro -->
+        <blockquote cite="http://instagram.com/valposting">
+            "aguanten los batios"
+        </blockquote>
+
+        <blockquote>
+            "segunda cita no aferctada por el estilo"
+        </blockquote>
+        Archivo
+        <br> Acerca de
+    </aside>
+    <!-- pie de pagina  -->
+
+    <footer>
+        Derechos Reservados 2010-2019
+    </footer>
+</body>
+
+</html>
