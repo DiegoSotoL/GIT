@@ -15,7 +15,7 @@ document.write(pass)
 const PI = 3.14 //convencion constante en mayuscula
 
 let result = 11+0
-
+//OBJETO JS
 var miAuto = new Object();
 miAuto.marca = "Ford";
 miAuto.modelo = "Mustang";
