@@ -1,3 +1,4 @@
+#reconocimiento de voz google
 import speech_recognition as sr
  
  
