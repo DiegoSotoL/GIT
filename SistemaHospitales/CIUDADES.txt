@@ -1,8 +1,0 @@
-NOMBRE: Valparaiso
-REGION: Valparaiso
-CODIGO POSTAL: Valparaiso
-
-NOMBRE: Antofagasta
-REGION: Antofagasta
-CODIGO POSTAL: Antofagasta
-
