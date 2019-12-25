@@ -1,5 +1,5 @@
 
-
+//funciones basicas
 console.log("Hola Mundo");
 //TIPOS DE DATOS
 //array
