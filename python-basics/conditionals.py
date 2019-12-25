@@ -1,3 +1,4 @@
+#cond
 #x=24
 # if x==30:
 #     print("x es menor que 30")
