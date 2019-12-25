@@ -1,5 +1,5 @@
 /*la clase ciudad posee 4 variables nombre (string), región (string), codigoPostal (string) y una ListaHospitales
-,además provee los getter y setter para cada uno de sus atributos y el constructor de tipo ciudad donde se instancia una ListaHospitales*/
+,ademáss provee los getter y setter para cada uno de sus atributos y el constructor de tipo ciudad donde se instancia una ListaHospitales*/
 package Clases;
 
 public class Ciudad {
