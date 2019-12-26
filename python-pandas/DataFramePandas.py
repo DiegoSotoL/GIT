@@ -70,7 +70,7 @@ df=pd.read_csv('pokemon_data.csv')
 
 ##EL POKEMON TIPO FUEGO DE LA TERCERA GENERACION CON LA MEJORHP
 
-###PANDAS BASICS###
+###GIT PANDAS BASICS###
 # dfff= df.loc[(df['Type 1']=='Fire') | (df['Type 2']=='Fire')]
 # # dfff.order
 # # print(dfff)
