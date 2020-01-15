@@ -1,0 +1,38 @@
+
+<div class="col-md-4 offset-md-4">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class = "form-group">
+                    <p>Fecha de arriendo</p>
+                    <input type="date" name = "rental_date" [(ngModel)]="rental.rental_date" placeholder="Fecha de arriendo" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <p>ID Inventario</p>
+                    <input type="number" name = "inventory_id" [(ngModel)]="rental.inventory_id"  placeholder="ID Inventario" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <p>ID Direccion</p>
+                    <input type="number" name = "customer_id" [(ngModel)]="rental.customer_id" placeholder="ID Direccion" class="form-control">
+                </div>
+                
+                <div class = "form-group">
+                    <p>Fecha de retorno</p>
+                    <input type="date" name = "return_date" [(ngModel)]="rental.return_date" placeholder="Fecha de retorno" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <p>ID Staff</p>
+                    <input type="number" name = "staff_id" [(ngModel)]="rental.staff_id" placeholder="ID Staff" class="form-control">
+                </div>
+                
+                <button class="btn btn btn-success btn-block" (click)= "edit ? updateRental() : saveRental()">
+                    GUARDAR
+                </button>
+            </form>                     
+            
+        </div>   
+    </div>
+</div>
+
+
+

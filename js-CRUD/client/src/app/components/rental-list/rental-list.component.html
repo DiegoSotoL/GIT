@@ -1,0 +1,30 @@
+
+
+    <div class ="col-md-8 offset-md-2" *ngFor="let renta of rental">
+        <div class ="card text-center" >
+            <div class ="card-headerd bg-dark  text-white  justify-content-betwen align-items-center">
+            {{renta.first_name}} {{renta.last_name}}
+            <button class = "btn btn-danger btn-float-right " (click)= "deleteRental(renta.rental_id)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            </div>
+            <img [src]="renta.picture == '' ? '/assets/noimage.png' : renta.picture" class = "card-img-top">
+            <div class ="card-body" >
+                
+                <!--COMO SE IMPRIMEN LOS TIPO NUMBER  -->
+            <p>ID: {{renta.rental_id}}</p>
+            <p>Fecha de arriendo: {{renta.rental_date}}</p>   
+            <p >ID Inventario: {{renta.inventory_id}}</p>
+            <p>ID Cliente: {{renta.customer_id}}</p>
+            <p>Fecha devuelta: {{renta.return_date}}</p>
+            <p>ID Staff: {{renta.staff_id}}</p>
+            <p>Ultima actualizacion: {{renta.last_update}}</p>
+            <a [routerLink]="['/renta/edit', renta.rental_id]" class= "btn btn-info btn-block">
+                EDITAR
+            </a>
+            </div>
+        </div>
+        <p></p>
+    </div>
+    
+
