@@ -1,0 +1,27 @@
+
+
+    <div class ="col-md-8 offset-md-2" *ngFor="let member of staff">
+        <div class ="card text-center" >
+            <div class ="card-headerd bg-dark  text-white  justify-content-betwen align-items-center">
+            {{member.first_name}} {{member.last_name}}
+            <button class = "btn btn-danger btn-float-right " (click)= "deleteStaff(member.staff_id)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            </div>
+            <img [src]="member.picture == '' ? '/assets/noimage.png' : member.picture" class = "card-img-top">
+            <div class ="card-body" >
+                
+            <p>ID: {{member.staff_id}}</p>
+            <p>Usuario: {{member.username}}</p>
+            <p >Contraseña: {{member.password}}</p>
+            <p>Correo: {{member.email}}</p>
+            <p>Ultima actualizacion: {{member.last_update}}</p>
+            <a [routerLink]="['/staff/edit', member.staff_id]" class= "btn btn-info btn-block">
+                EDITAR
+            </a>
+            </div>
+        </div>
+        <p></p>
+    </div>
+    
+

@@ -1,0 +1,52 @@
+
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class = "form-group">
+                    <input type="text" name = "first_name" [(ngModel)]="staff.first_name" placeholder="Nombre" class="form-control">
+                </div>
+
+                <div class = "form-group">
+                    <input type="text" name = "last_name" [(ngModel)]="staff.last_name"  placeholder="Apellido" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="number" name = "adress_id" [(ngModel)]="staff.address_id" placeholder="ID Direccion" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="url" name = "image" placeholder="picture" [(ngModel)]="staff.picture" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="text" name = "email" [(ngModel)]="staff.email" placeholder="Email" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="number" name = "store_id" [(ngModel)]="staff.store_id" placeholder="ID Tienda" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="text" name = "username" [(ngModel)]="staff.username" placeholder="Usuario" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <input type="text" name = "password" [(ngModel)]="staff.password" placeholder="Contraseña"  class="form-control">
+                </div>
+                
+                <button class="btn btn btn-success btn-block" (click)= "edit ? updateStaff() : saveStaff()">
+                    GUARDAR
+                </button>
+            </form>                     
+            
+        </div>   
+    </div>
+</div>
+<div class="col-md-4 offset-md-1.5">
+    <div class="card card-body text-center">
+        <img [src]="staff.picture == '' ? '/assets/noimage.png' : staff.picture" class = "card-img-top">
+        <h3>{{staff.staff_id}}-{{staff.first_name == '' ? 'NOMBRE' : staff.first_name}} {{staff.last_name == '' ? 'APELLIDO' : staff.last_name}}</h3>
+        <p>{{staff.username == '' ? 'USUARIO' : staff.username}}</p>
+        <p>{{staff.password == '' ? 'CONTRASEÑA' : staff.password}}</p>
+        <p>{{staff.email == '' ? 'MAIL' : staff.email}}</p>
+        
+    </div>
+</div>
+
+
+
