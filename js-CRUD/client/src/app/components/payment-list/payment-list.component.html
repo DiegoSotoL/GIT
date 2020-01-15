@@ -1,0 +1,30 @@
+
+
+    <div class ="col-md-8 offset-md-2" *ngFor="let pay of payment">
+        <div class ="card text-center" >
+            <div class ="card-headerd bg-dark  text-white  justify-content-betwen align-items-center">
+            {{pay.first_name}} {{pay.last_name}}
+            <button class = "btn btn-danger btn-float-right " (click)= "deletePayment(pay.payment_id)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            </div>
+            <img [src]="pay.picture == '' ? '/assets/noimage.png' : pay.picture" class = "card-img-top">
+            <div class ="card-body" >
+                
+                
+            <p>ID: {{pay.payment_id}}</p>
+            <p>ID Costumer: {{pay.costumer_id}}</p>   
+            <p >ID Staff: {{pay.staff_id}}</p>
+            <p>ID Rental: {{pay.rental_id}}</p>
+            <p>Monto: {{pay.amount}}</p>
+            <p>Fecha pago: {{pay.payment_date}}</p>
+            <p>Ultima actualizacion: {{pay.last_update}}</p>
+            <a [routerLink]="['/pay/edit', pay.payment_id]" class= "btn btn-info btn-block">
+                EDITAR
+            </a>
+            </div>
+        </div>
+        <p></p>
+    </div>
+    
+

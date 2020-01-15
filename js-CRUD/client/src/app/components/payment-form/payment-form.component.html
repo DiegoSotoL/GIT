@@ -1,0 +1,38 @@
+
+<div class="col-md-4 offset-md-4">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class = "form-group">
+                    <p>ID Costumer</p>
+                    <input type="number" name = "customer_id" [(ngModel)]="payment.customer_id" placeholder="ID Costumer" class="form-control">
+                </div>
+                <div class = "form-group">                        
+                    <p>ID staff</p>
+                    <input type="number" name = "staff_id" [(ngModel)]="payment.staff_id"  placeholder="ID staff" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <p>ID Rental</p>
+                    <input type="number" name = "rental_id" [(ngModel)]="payment.rental_id" placeholder="ID Rental" class="form-control">
+                </div>
+                
+                <div class = "form-group">
+                    <p>monto</p>
+                    <input type="number" name = "amount" [(ngModel)]="payment.amount" placeholder="monto" class="form-control">
+                </div>
+                <div class = "form-group">
+                    <p>Fecha del pago</p>
+                    <input type="Date" name = "payment_date" [(ngModel)]="payment.payment_date" placeholder="Fecha del pago" class="form-control">
+                </div>
+                
+                <button class="btn btn btn-success btn-block" (click)= "edit ? updatePayment() : savePayment()">
+                    GUARDAR
+                </button>
+            </form>                     
+            
+        </div>   
+    </div>
+</div>
+
+
+
