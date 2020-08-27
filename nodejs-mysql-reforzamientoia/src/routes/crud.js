@@ -1,4 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = router;
+
+const pool = require('../database');
+
+module.exports = router; 
