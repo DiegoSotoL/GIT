@@ -32,7 +32,7 @@ app.use((req,res,next) =>{
 //Rutas
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
-app.use('/crud',require('./routes/crud'));
+app.use('/administracion',require('./routes/crud_admin'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public' )));

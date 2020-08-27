@@ -1,4 +1,5 @@
 #comandos basicos git#
+dentro de la carpeta git
 git init
 git add .
 git commit -m "mensaje de actualziacion"

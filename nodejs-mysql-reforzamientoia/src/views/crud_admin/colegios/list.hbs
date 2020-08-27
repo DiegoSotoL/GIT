@@ -1,0 +1,28 @@
+<div class="container p-4">
+    <div class="row">
+        {{#each colegios}}
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class = "card-title text-uppercase">
+                            {{nombre}}  
+                        </h3>
+                        <p style="font-size:14px; color:#db330f">{{timeago created_at}}</p>
+                        <p class = "m-2">{{direccion}}</p>
+                        <p class = "m-2">{{telefono}}</p>
+                        <p class = "m-2">{{correo}}</p>
+                        <a href="/administracion/colegios/delete/{{id}}"class ="btn btn-danger">BORAR</a>
+                        <a href=""class ="btn btn-secondary">EDITAR</a>
+                    </div>    
+                </div>
+            </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>NO HAY COLEGIOS REGISTRADOS</p>
+                    <a href="/administracion/colegios/add">REGISTRAR</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

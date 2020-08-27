@@ -7,12 +7,14 @@ CREATE TABLE colegios(
     nombre VARCHAR(60) NOT NULL,
     direccion VARCHAR(60) NOT NULL,
     telefono VARCHAR(60) NOT NULL,
-    correo VARCHAR(60) NOT NULL
+    correo VARCHAR(60) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp
 );
 CREATE TABLE cursos(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre_curso VARCHAR(60) NOT NULL,
     cant_alumnos INT(11) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     id_colegio INT(11),
     CONSTRAINT fk_colegio_curso FOREIGN KEY (id_colegio) REFERENCES colegios(id)
 
@@ -23,6 +25,7 @@ CREATE TABLE alumnos(
     telefono VARCHAR(60) NOT NULL,
     correo VARCHAR(60),
     contraseña VARCHAR(60),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     id_curso INT(11),
     CONSTRAINT fk_curso_alumno FOREIGN KEY (id_curso) REFERENCES cursos(id)
 
@@ -33,6 +36,7 @@ CREATE TABLE profesores(
     telefono VARCHAR(60) NOT NULL,
     correo VARCHAR(60) NOT NULL,
     contraseña VARCHAR(60) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     id_curso INT(11),
     CONSTRAINT fk_curso_profesor FOREIGN KEY (id_curso) REFERENCES cursos(id)
 
@@ -41,16 +45,16 @@ CREATE TABLE profesores(
 CREATE TABLE asignaturas(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre_asignatura VARCHAR(60) NOT NULL,
-    rut_profesor VARCHAR(12),
-    rut_alumno VARCHAR(12),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     promedio INT(11) NOT NULL,
-    CONSTRAINT fk_profesor_asignatura FOREIGN KEY (rut_profesor) REFERENCES profesores(rut),
+    rut_alumno VARCHAR(12),
     CONSTRAINT fk_alumno_asignatura FOREIGN KEY (rut_alumno) REFERENCES alumnos(rut)
 );
 CREATE TABLE notas(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre_actividad VARCHAR(60) NOT NULL,
     clasificacion INT(11) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     rut_alumno VARCHAR(12),
     id_asignatura INT(11),
     CONSTRAINT fk_alumno_nota FOREIGN KEY (rut_alumno) REFERENCES alumnos(rut),
@@ -59,6 +63,7 @@ CREATE TABLE notas(
 CREATE TABLE unidades(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(60) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     id_asignatura INT(11),
     CONSTRAINT fk_asignatura_unidad FOREIGN KEY (id_asignatura) REFERENCES asignaturas(id)
 );
@@ -67,6 +72,7 @@ CREATE TABLE preguntas(
     pregunta VARCHAR(60) NOT NULL,
     nivel VARCHAR(60) NOT NULL,
     ruta_imagen VARCHAR(60) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     id_unidad INT(11),
     CONSTRAINT fk_unidad_pregunta FOREIGN KEY (id_unidad) REFERENCES unidades(id)
 );
