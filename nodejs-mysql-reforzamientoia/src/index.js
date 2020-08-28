@@ -32,8 +32,12 @@ app.use((req,res,next) =>{
 //Rutas
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
-app.use('/administracion',require('./routes/crud_admin'));
-
+app.use('/administracion',require('./routes/crud_admin_colegio'));
+app.use('/administracion',require('./routes/crud_admin_curso'));
+app.use('/administracion',require('./routes/crud_admin_profesor'));
+app.use('/administracion',require('./routes/crud_admin_asignatura'));
+app.use('/administracion',require('./routes/crud_admin_unidad'));
+app.use('/administracion',require('./routes/crud_admin_pregunta'));
 //Public
 app.use(express.static(path.join(__dirname, 'public' )));
 //Inicio

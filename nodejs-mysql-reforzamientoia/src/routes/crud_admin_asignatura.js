@@ -1,0 +1,53 @@
+const express = require('express');
+const router = express.Router();
+
+
+const pool = require('../database');
+
+
+router.get('/asignaturas/add', (req,res) =>{
+   res.render('crud_admin/asignaturas/add');
+});
+
+router.post('/asignaturas/add', async (req,res) =>{
+   const { nombre_asignatura,promedio,id_profesor} = req.body;
+   const asignaturaNueva ={
+      nombre_asignatura,
+      promedio,
+      id_profesor
+   };
+   await pool.query('INSERT INTO asignaturas set ?', [asignaturaNueva]);
+   res.redirect('/administracion/asignaturas')
+ });
+
+ router.get('/asignaturas', async (req,res) => {
+   const asignaturas = await pool.query('SELECT * FROM asignaturas');
+   res.render('crud_admin/asignaturas/list',{ asignaturas });
+ });
+
+ router.get('/asignaturas/delete/:id', async(req,res) => {
+   console.log(req.params.id);
+   const { id } = req.params;
+   await pool.query('DELETE FROM asignaturas WHERE id = ?',[id]); 
+   res.redirect('/administracion/asignaturas')
+});
+
+router.get('/asignaturas/edit/:id', async (req,res) => {
+   console.log(req.params.nombre);
+   const { id } = req.params;
+   const asignaturas = await pool.query('SELECT * FROM asignaturas WHERE id = ?', [id] );
+   console.log(asignaturas[0]);
+   res.render('crud_admin/asignaturas/edit', {asignatura : asignaturas[0]});
+});
+router.post('/asignaturas/edit/:id', async ( req , res ) => {
+   const{id} = req.params;
+   const { nombre_asignatura,promedio,id_profesor} = req.body;
+   const asignaturaNueva ={
+      nombre_asignatura,
+      promedio,
+      id_profesor
+   };
+   await pool.query('UPDATE asignaturas set ? WHERE id = ?', [asignaturaNueva, id])
+   res.redirect('/administracion/asignaturas')
+});
+module.exports = router; 
