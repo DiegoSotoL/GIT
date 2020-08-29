@@ -17,6 +17,7 @@ router.post('/cursos/add', async (req,res) =>{
       id_colegio
    };
    await pool.query('INSERT INTO cursos set ?', [cursoNuevo]);
+   req.flash('success', 'Curso guardado satisfactoriamente!');
    res.redirect('/administracion/cursos')
  });
 
@@ -28,7 +29,8 @@ router.post('/cursos/add', async (req,res) =>{
  router.get('/cursos/delete/:id', async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
-   await pool.query('DELETE FROM cursos WHERE id = ?',[id]); 
+   await pool.query('DELETE FROM cursos WHERE id = ?',[id]);
+   req.flash('success', 'Curso eliminado satisfactoriamente!'); 
    res.redirect('/administracion/cursos')
 });
 
@@ -48,6 +50,7 @@ router.post('/cursos/edit/:id', async ( req , res ) => {
       id_colegio
    };
    await pool.query('UPDATE cursos set ? WHERE id = ?', [cursoNuevo, id])
+   req.flash('success', 'Curso actualizado satisfactoriamente!');
    res.redirect('/administracion/cursos')
 });
 module.exports = router; 

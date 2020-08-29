@@ -19,6 +19,7 @@ router.post('/profesores/add', async (req,res) =>{
       id_curso
    };
    await pool.query('INSERT INTO profesores set ?', [profesorNuevo]);
+   req.flash('success', 'Profesor guardado satisfactoriamente!');
    res.redirect('/administracion/profesores')
  });
 
@@ -30,7 +31,8 @@ router.post('/profesores/add', async (req,res) =>{
  router.get('/profesores/delete/:id', async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
-   await pool.query('DELETE FROM profesores WHERE id = ?',[id]); 
+   await pool.query('DELETE FROM profesores WHERE id = ?',[id]);
+   req.flash('success', 'Profesor eliminado satisfactoriamente!'); 
    res.redirect('/administracion/profesores')
 });
 
@@ -52,6 +54,7 @@ router.post('/profesores/edit/:id', async ( req , res ) => {
       id_curso
    };
    await pool.query('UPDATE profesores set ? WHERE id = ?', [profesorNuevo, id])
+   req.flash('success', 'Profesor actualizado satisfactoriamente!');
    res.redirect('/administracion/profesores')
 });
 module.exports = router; 

@@ -16,6 +16,7 @@ router.post('/preguntas/add', async (req,res) =>{
       id_unidad
    };
    await pool.query('INSERT INTO preguntas set ?', [preguntaNueva]);
+   req.flash('success', 'Pregunta guardada satisfactoriamente!');
    res.redirect('/administracion/preguntas')
  });
 
@@ -27,7 +28,8 @@ router.post('/preguntas/add', async (req,res) =>{
  router.get('/preguntas/delete/:id', async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
-   await pool.query('DELETE FROM preguntas WHERE id = ?',[id]); 
+   await pool.query('DELETE FROM preguntas WHERE id = ?',[id]);
+   req.flash('success', 'Pregunta eliminada satisfactoriamente!'); 
    res.redirect('/administracion/preguntas')
 });
 
@@ -48,6 +50,7 @@ router.post('/preguntas/edit/:id', async ( req , res ) => {
       id_unidad
    };
    await pool.query('UPDATE preguntas set ? WHERE id = ?', [preguntaNueva, id])
+   req.flash('success', 'Pregunta actualizada satisfactoriamente!');
    res.redirect('/administracion/preguntas')
 });
 module.exports = router; 

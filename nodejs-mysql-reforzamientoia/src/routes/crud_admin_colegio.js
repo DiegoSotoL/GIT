@@ -18,6 +18,7 @@ router.post('/colegios/add', async (req,res) =>{
       correo
    }
    await pool.query('INSERT INTO colegios set ?', [ColegioNuevo]);
+   req.flash('success', 'Colegio agregado satisfactoriamente!');
    res.redirect('/administracion/colegios')
  });
 
@@ -29,7 +30,8 @@ router.post('/colegios/add', async (req,res) =>{
  router.get('/colegios/delete/:id', async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
-   await pool.query('DELETE FROM colegios WHERE id = ?',[id]); 
+   await pool.query('DELETE FROM colegios WHERE id = ?',[id]);
+   req.flash('success', 'Colegio eliminado satisfactoriamente!'); 
    res.redirect('/administracion/colegios')
 });
 
@@ -50,6 +52,7 @@ router.post('/colegios/edit/:id', async ( req , res ) => {
       correo
    };
    await pool.query('UPDATE colegios set ? WHERE id = ?', [nuevoColegio, id])
+   req.flash('success', 'Colegio actualizado satisfactoriamente!');
    res.redirect('/administracion/colegios')
 });
 module.exports = router; 

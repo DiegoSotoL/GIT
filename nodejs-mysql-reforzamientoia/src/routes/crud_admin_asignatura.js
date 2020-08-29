@@ -17,7 +17,8 @@ router.post('/asignaturas/add', async (req,res) =>{
       id_profesor
    };
    await pool.query('INSERT INTO asignaturas set ?', [asignaturaNueva]);
-   res.redirect('/administracion/asignaturas')
+   req.flash('success', 'Asignatura guardada satisfactoriamente!');
+   res.redirect('/administracion/asignaturas');
  });
 
  router.get('/asignaturas', async (req,res) => {
@@ -28,7 +29,8 @@ router.post('/asignaturas/add', async (req,res) =>{
  router.get('/asignaturas/delete/:id', async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
-   await pool.query('DELETE FROM asignaturas WHERE id = ?',[id]); 
+   await pool.query('DELETE FROM asignaturas WHERE id = ?',[id]);
+   req.flash('success', 'Asignatura eliminada satisfactoriamente!'); 
    res.redirect('/administracion/asignaturas')
 });
 
@@ -48,6 +50,7 @@ router.post('/asignaturas/edit/:id', async ( req , res ) => {
       id_profesor
    };
    await pool.query('UPDATE asignaturas set ? WHERE id = ?', [asignaturaNueva, id])
+   req.flash('success', 'Asignatura actualizada satisfactoriamente!');
    res.redirect('/administracion/asignaturas')
 });
 module.exports = router; 

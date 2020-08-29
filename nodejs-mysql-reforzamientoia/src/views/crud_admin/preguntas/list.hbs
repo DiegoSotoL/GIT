@@ -1,3 +1,4 @@
+
 <div class="container p-4">
     <div class="row">
         {{#each preguntas}}
@@ -7,7 +8,7 @@
                         <h3 class = "card-title text-uppercase">
                             {{pregunta}}  
                         </h3>
-                        <p style="font-size:14px; color:#db330f">{{timeago ultima_modificacion}}</p>
+                        <p style="font-size:14px; color:#db330f">{{timeago fecha_creacion}}</p>
                         <p class = "m-2">{{nivel}}</p>
                         <p class = "m-2">{{ruta_imagen}}</p>
                         <p class = "m-2">{{id_unidad}}</p>
@@ -24,5 +25,6 @@
                 </div>
             </div>
         {{/each}}
+        
     </div>
 </div>
