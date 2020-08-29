@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const pool = require('../database');
-
+const { isLoggedIn } = require('../lib/auth');
 
 router.get('/unidades/add', (req,res) =>{
    res.render('crud_admin/unidades/add');

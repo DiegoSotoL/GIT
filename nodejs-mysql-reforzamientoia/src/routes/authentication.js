@@ -2,25 +2,25 @@ const express = require('express');
 const router = express.Router();
 
 const passport = require('passport');
-const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
 // SIGNUP
-router.get('/signup', (req, res) => {
+router.get('/signup', isNotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
-router.post('/signup',
+router.post('/signup',isNotLoggedIn,
     passport.authenticate('local.signup', {
         successRedirect: '/profile',
         failureRedirect: '/signup',
         failureFlash: true
     }));
 
-router.get('/signin', (req, res) => {
+router.get('/signin', isNotLoggedIn, (req, res) => {
     res.render('auth/signin');
 });
 
-router.post('/signin', (req, res, next) => {
+router.post('/signin', isNotLoggedIn,(req, res, next) => {
    /* req.check('correo ', 'Se requiere el ingreso del correo').notEmpty();
    req.check('password', 'Se requiere el ingreso de la contraseña').notEmpty();
     const errors = req.validationErrors();
@@ -34,7 +34,7 @@ router.post('/signin', (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 });
-router.get('/logout', (req, res) => {
+router.get('/logout', isLoggedIn,(req, res) => {
     req.logOut();
     res.redirect('/');
 });

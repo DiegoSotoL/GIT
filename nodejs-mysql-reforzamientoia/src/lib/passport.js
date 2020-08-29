@@ -37,13 +37,15 @@ passport.use('local.signup', new LocalStrategy({
         nombre_completo,
         tipo
     };
+
     nuevoUsuario.password = await helpers.encryptPassword(password);
     const result = await pool.query('INSERT INTO users SET ?', [nuevoUsuario]);
-    nuevoUsuario.id = result.inserId;
+    nuevoUsuario.id = result.insertId;
     return done(null, nuevoUsuario)
 })); 
 
 passport.serializeUser((user, done) => {
+    console.log(user);
     done(null, user.id);
 });
   

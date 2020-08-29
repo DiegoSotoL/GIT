@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
+const { isLoggedIn } = require('../lib/auth');
 
-
-router.get('/preguntas/add', (req,res) =>{
+router.get('/preguntas/add', isLoggedIn, (req,res) =>{
    res.render('crud_admin/preguntas/add');
 });
 
-router.post('/preguntas/add', async (req,res) =>{
+router.post('/preguntas/add', isLoggedIn, async (req,res) =>{
    const { pregunta,nivel,ruta_imagen,id_unidad} = req.body;
    const preguntaNueva ={
       pregunta,
@@ -20,12 +20,12 @@ router.post('/preguntas/add', async (req,res) =>{
    res.redirect('/administracion/preguntas')
  });
 
- router.get('/preguntas', async (req,res) => {
+ router.get('/preguntas', isLoggedIn, async (req,res) => {
    const preguntas = await pool.query('SELECT * FROM preguntas');
    res.render('crud_admin/preguntas/list',{ preguntas });
  });
 
- router.get('/preguntas/delete/:id', async(req,res) => {
+ router.get('/preguntas/delete/:id', isLoggedIn, async(req,res) => {
    console.log(req.params.id);
    const { id } = req.params;
    await pool.query('DELETE FROM preguntas WHERE id = ?',[id]);
@@ -33,14 +33,14 @@ router.post('/preguntas/add', async (req,res) =>{
    res.redirect('/administracion/preguntas')
 });
 
-router.get('/preguntas/edit/:id', async (req,res) => {
+router.get('/preguntas/edit/:id', isLoggedIn, async (req,res) => {
    console.log(req.params.nombre);
    const { id } = req.params;
    const preguntas = await pool.query('SELECT * FROM preguntas WHERE id = ?', [id] );
    console.log(preguntas[0]);
    res.render('crud_admin/preguntas/edit', {pregunta : preguntas[0]});
 });
-router.post('/preguntas/edit/:id', async ( req , res ) => {
+router.post('/preguntas/edit/:id', isLoggedIn, async ( req , res ) => {
    const{id} = req.params;
    const { pregunta,nivel,ruta_imagen,id_unidad} = req.body;
    const preguntaNueva ={

@@ -1,3 +1,9 @@
+.marco1 {
+  padding:8px;
+  background-color: #f5f5f5;
+  width: 200px;
+  border: 1px solid #999999;
+} 
 body {
     background: #f5f6fa;
     font-family: 'Open Sans', sans-serif;
@@ -35,13 +41,16 @@ body {
     font-size: 4rem;
     margin: 0;
     padding: 0;
+    color: #000
   }
   
   @media (min-width: 992px) {
     .masthead {
       height: 100vh;
+      color: #000
     }
     .masthead h1 {
       font-size: 5.5rem;
+      color: #000
     }
   }
