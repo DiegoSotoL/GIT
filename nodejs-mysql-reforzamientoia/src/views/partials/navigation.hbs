@@ -1,13 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/">Reforzamiento IA</a>
+    <a class="navbar-brand" href="/">Refuerzos IA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        {{#if user}}
+        
+        {{#if user.tipo}}
+        {{#ifEquals user.tipo 1}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -76,6 +78,34 @@
             <a class="dropdown-item" href="/administracion/preguntas/add">Agregar Pregunta</a>
           </div>
         </li>
+        {{/ifEquals }}
+        
+        {{#ifEquals user.tipo 2}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+          Notas
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profesores/notas">Mostrar Notas Curso</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/profesores/notas/add">Evaluar alumnos</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+          Alumnos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/profesores/alumnos">Mostrar Alumnos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/profesores/alumnos/add">Agregar Alumno</a>
+          </div>
+        </li>
+        {{/ifEquals }}
+        
+        
         <li class="nav-item">
           <a class="nav-link" href="/profile">Perfil</a>
         </li>
@@ -89,7 +119,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/signup">Registrar</a>
         </li>
-        {{/if}}       
+       
+        {{/if}}          
       </ul>
     </div>
   </div>

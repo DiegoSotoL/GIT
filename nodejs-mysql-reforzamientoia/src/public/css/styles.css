@@ -6,7 +6,7 @@
 } 
 body {
     background: #f5f6fa;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Russo One', sans-serif;
 
     overflow: hidden;
 }
@@ -34,7 +34,7 @@ body {
     background: url('/img/background.jpeg');
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; 
 }
 
 .masthead h1 {
@@ -53,4 +53,52 @@ body {
       font-size: 5.5rem;
       color: #000
     }
+  }
+
+  .card2 {
+    display: grid;
+    grid-template-columns: 520px;
+    grid-template-rows: 10px 500px 10x;
+    grid-template-areas: "image" "text" "stats";
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    font-family: 'Russo One', sans-serif;
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: default;
+    margin:0px;
+  }
+  
+  .card2-text {
+    grid-area: text;
+  }
+  
+  
+  .card2-text {
+    grid-area: text;
+    margin: 1px;
+  }
+  .card2-text .date {
+    color: rgb(255, 7, 110);
+    font-size:13px;
+  }
+  .card2-text p {
+    color: grey;
+    font-size:30px;
+    font-weight: 100;
+  }
+  .card2-text h1 {
+    margin-top:0px;
+    font-size:50px;
+  }
+  .card2-text h2 {
+    margin-top:0px;
+    font-size:50px;
+    font-weight: 900;
+  }
+  
+  .card2:hover {
+    transform: scale(1.15);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
   }

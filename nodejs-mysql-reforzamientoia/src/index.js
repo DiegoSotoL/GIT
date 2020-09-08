@@ -7,22 +7,43 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
-const passport = require('passport')
+const passport = require('passport');
+const { truncateSync } = require('fs');
+const app = express();0
+const { format } = require('timeago.js');
+
+
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials'),
+    extname: '.hbs',
+    helpers:require('./lib/handlebars')    ,
+    //custom helper
+    helpers:{
+        ifEquals  : function(arg1, arg2, options) {
+            return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+        },
+        timeago: function (timestamp)  {
+            return format(timestamp);
+        }
+    }
+});
+
+
+
+
 require('passport-local')
 //Init
-const app = express();
+
 require('./lib/passport')
 
 //Config
+
 app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
-app.engine('.hbs', exphbs({
-    defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs',
-    helpers:require('./lib/handlebars')
-}));
+app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
 //Middlewares
@@ -56,6 +77,9 @@ app.use('/administracion',require('./routes/crud_admin_profesor'));
 app.use('/administracion',require('./routes/crud_admin_asignatura'));
 app.use('/administracion',require('./routes/crud_admin_unidad'));
 app.use('/administracion',require('./routes/crud_admin_pregunta'));
+app.use('/profesores',require('./routes/crud_profe_alumno'));
+app.use('/profesores',require('./routes/crud_profe_notas'));
+app.use('/alumnos',require('./routes/curso_alumno'));
 //Public
 app.use(express.static(path.join(__dirname, 'public' )));
 //Inicio

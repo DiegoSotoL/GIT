@@ -4,7 +4,7 @@ USE database_app;
 
 CREATE TABLE users(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    tipo VARCHAR(60) NOT NULL,
+    tipo INT(11) NOT NULL,
     nombre_completo VARCHAR(100) NOT NULL,
     correo VARCHAR(60) NOT NULL,
     password VARCHAR(60) NOT NULL,
