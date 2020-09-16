@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "C:\\Users\\diego\\Anaconda3\\python.exe",
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "debug.javascript.warnOnLongPrediction": false
 }

@@ -72,6 +72,8 @@ CREATE TABLE notas(
 );
 CREATE TABLE unidades(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    mensaje_audio VARCHAR(500) NOT NULL,
+    audio_url VARCHAR(100) NOT NULL,
     nombre_unidad VARCHAR(100) NOT NULL,
     fecha_creacion timestamp NOT NULL DEFAULT current_timestamp,
     id_asignatura INT(11),

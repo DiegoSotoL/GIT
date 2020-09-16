@@ -36,6 +36,19 @@ body {
     background-repeat: no-repeat;
     background-size: cover; 
 }
+.fondoia {
+  color: white;
+  min-height: 30rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: url('/img/ai-loader-opt.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
 
 .masthead h1 {
     font-size: 4rem;
@@ -102,3 +115,19 @@ body {
     transform: scale(1.15);
     box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
   }
+
+  #selector {
+    width:100%;
+    height:10%;
+    display: block;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding:0;
+    margin:0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
