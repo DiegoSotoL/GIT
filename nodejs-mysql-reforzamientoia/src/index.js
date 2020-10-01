@@ -14,7 +14,15 @@ const { format } = require('timeago.js');
 const Speaker = require('speaker');
 const texttospech = require('./texttospech');
 const router = express.Router();
-var url = '';
+var myUrlBienvenida = '';
+var myUrlPregunta1 = '';
+var myUrlPregunta2 = '';
+const { Storage } = require('@google-cloud/storage');
+const storage = new Storage({
+    keyFilename: path.join(__dirname, '../apikeys/reforzamientoalgebraia-017aa4b76248.json'),
+    projectId: 'reforzamientoalgebraia'
+});
+const audioaibucket = storage.bucket('audios-ai');
 
 
 
@@ -41,25 +49,79 @@ const hbs = exphbs.create({
         timeago: function (timestamp) {
             return format(timestamp);
         },
-        tts: function () {
-            texttospech.y().then((result) => {
-                
-                url = result[0];
-                
-                    console.log(url);
-                    return url; 
-               
-            }); 
+        ttsBienvenida: async function () {
+            const file = audioaibucket.file('bienvenida.mp3');
+            const config = {
+                action: 'read',
+                expires: '03-17-2025'
+            };
+            myUrlBienvenida = await new Promise((resolve, reject) => {
 
+                file.getSignedUrl(config).then(signedUrls => {
 
+                    // este codigo se ejejcutara cuando llegue la respuesta
+                    let myUrlBienvenida = signedUrls[0] // mi URL
+                    resolve(myUrlBienvenida); // esto es el return de la promesa
 
-           /*  url = 'https://storage.googleapis.com/audios-ai/bienvenida.mp3?GoogleAccessId=audio-bucket%40reforzamientoalgebraia.iam.gserviceaccount.com&Expires=16447028400&Signature=M9HeyeKduXLXGFIuIaigsuB16eBX3AF4rsq5AcDqxGi9e9r8w5Sf%2Fe80vpgbHU%2Fk3ZCpmcxgu7Yo9hS9hB%2Bxmz3pF73DmlWqdLZAPuGn9sWBW1rCYW%2BGzFjfeOjkH7AdIB%2FnjpmjqfeT03vXmJDvJ8qCRanTHUFMFFgz675udfSN1s5Yx%2BBv%2BByptsSOjNnZ482cPZzcp5bYp1Du9ZzcAgKzfP2hT%2Bd6SRkHkOIKRl1FyN0prjTTaShJDqU0aw1JKBHmrQMoXCmZTvMe1slzRGySbmY9FwzOOFJ7PRP7U7FgQRt98ajT9snRRw7AwUTHQ%2FnLkylqmuip5lkCHzUeHA%3D%3D';
-             
-             return url;  */
+                }).catch(err => {
+
+                    console.log(error);
+                    reject(error)
+                });
+            });
         },
-        url: function(){
-            setTimeout(function(){return url}, 3000);
+        ttsPregunta1: async function () {
+            const file = audioaibucket.file('p1-u2-6.mp3');
+            const config = {
+                action: 'read',
+                expires: '03-17-2025'
+            };
+            myUrlPregunta1 = await new Promise((resolve, reject) => {
+
+                file.getSignedUrl(config).then(signedUrls => {
+
+                    // este codigo se ejejcutara cuando llegue la respuesta
+                    let myUrlPregunta1 = signedUrls[0] // mi URL
+                    resolve(myUrlPregunta1); // esto es el return de la promesa
+
+                }).catch(err => {
+
+                    console.log(error);
+                    reject(error)
+                });
+            });
+        },
+        ttsPregunta2: async function () {
+            const file = audioaibucket.file('p2-u2-6.mp3');
+            const config = {
+                action: 'read',
+                expires: '03-17-2025'
+            };
+            myUrlPregunta2 = await new Promise((resolve, reject) => {
+
+                file.getSignedUrl(config).then(signedUrls => {
+
+                    // este codigo se ejejcutara cuando llegue la respuesta
+                    let myUrlPregunta2 = signedUrls[0] // mi URL
+                    resolve(myUrlPregunta2); // esto es el return de la promesa
+
+                }).catch(err => {
+
+                    console.log(error);
+                    reject(error)
+                });
+            });
+        },
+        urlBienvenida: function () {
+            return myUrlBienvenida;
+        },
+        urlPregunta1: function () {
+            return myUrlPregunta1;
+        },
+        urlPregunta2: function () {
+            return myUrlPregunta2;
         }
+
     }
 });
 

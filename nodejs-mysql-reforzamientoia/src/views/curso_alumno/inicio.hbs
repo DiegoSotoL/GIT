@@ -1,7 +1,34 @@
 <main class="index">
     <header class="fondoia d-flex">
-        <p>{{tts}}</p>
-        {{url}}
-        <audio src= {{url}} autoplay></audio>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                        autocomplete="off">
+                        Single toggle
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <audio src={{urlBienvenida}} autoplay></audio>
+        {{!-- <script>
+            setTimeout(function () { alert("After 5 seconds!"); }, 5000);
+        </script> --}}
+
+        <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 15000)">
+            <source src={{urlPregunta1}} type="audio/mp3" />
+        </audio>
+        {{!--ACA TIENE QUE IR LA PRIJMERA RESPUESTA --}}
+        <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 24000)">
+            <source src={{urlPregunta2}} type="audio/mp3" />
+        </audio>
+        {{!--ACA TIENE QUE IR LA SEGUNDA RESPUESTA --}}
+
     </header>
 </main>
