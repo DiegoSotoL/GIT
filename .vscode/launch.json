@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\nodejs-mysql-reforzamientoia\\src\\texttospech.js"
+            "program": "${workspaceFolder}\\nodejs-mysql-reforzamientoia\\src\\speechtotext.js"
         }
     ]
 }

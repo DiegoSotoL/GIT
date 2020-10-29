@@ -3,17 +3,21 @@
 
 
 
-        <div class="container">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <div class="w-25 h-25 p-3 container bg-black align-self-center rounded-circle">
             <div class="row">
                 <div class="col text-center">
-                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
-                        autocomplete="off">
-                        Single toggle
+                    <button onclick="grabar()" class="btn btn-outline-danger align-self-center rounded-circle "
+                        data-toggle="button" aria-pressed="false" autocomplete="off"><i
+                            class="fas fa-microphone fa-8x"></i>
+
                     </button>
+
                 </div>
             </div>
         </div>
-
 
 
         <audio src={{urlBienvenida}} autoplay></audio>
@@ -29,6 +33,6 @@
             <source src={{urlPregunta2}} type="audio/mp3" />
         </audio>
         {{!--ACA TIENE QUE IR LA SEGUNDA RESPUESTA --}}
-
+        
     </header>
 </main>

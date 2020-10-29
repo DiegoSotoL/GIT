@@ -43,6 +43,10 @@ router.get('/alumnos/edit/:id', async (req,res) => {
    console.log(alumnos[0]);
    res.render('crud_profe/alumnos/edit', {alumno : alumnos[0]});
 });
+router.get('/alumnos/addnota/:id', async (req,res) => {
+   
+   res.render('crud_profe/notas/list');
+});
 router.post('/alumnos/edit/:id', async ( req , res ) => {
    const{id} = req.params;
    const { rut,nombre_completo,telefono,correo,id_curso} = req.body;

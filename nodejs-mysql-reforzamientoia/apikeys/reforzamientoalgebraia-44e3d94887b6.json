@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "reforzamientoalgebraia",
+  "private_key_id": "44e3d94887b6a0542a05c09e7989bde9bf30744b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC1ji7soAbYnkKF\n6wh9IJf0htdfZJ2DrxRlRrbVj8km7k5lNOj2thzgutFI74nzGftAHH0dX8X8790n\njkW5TFf0hvFnc/vp4mr7QYs3rQC8vo/hnFEjco7YpB4QRlVkY+mYrBfBIsPLp1B4\n0p4APhOKMO1iats7KZ8PmuwbVr4/Y9XZeTF4A5MtfD9lN6Bsiu26P2P9uo/GNm6f\nlRsEmQ1lgb89rIkWxgZs8+/E2CFEr3Vp5ZjMWu+xlgXFz4NpEYkzSkMiS92SeJwo\noyjrk73IFihkz5fEWxX9/xa/sgkbVPDPsbXfD0xw2KzVhnlQresjarh6uYxa4MAw\nf6+BfocrAgMBAAECggEAO2n/UzJ/aw5HiNnEmmY7NCuYecBMh9aY3xfIJ5V5Z4Mf\nJqGtB2fLhYO9j5fMVkEPZwirrRw1h7PbdOFrUdt5AS3T/F4Jd53AEt99Nsgn8JyQ\nK23jY61Or/jtWbgao9LKlErlLzA4UQI9JH0QddXawSOH2+hKPE8/nXS+hafadJWi\nPx0cXROzzqn1rmjwS2fvlbPd1cbY/o6pVcuImSoYSBgidPGmFl5OzoDDDhppIU96\nwX5bQQqQ0G3zblchWLtCJR8wAA35tBoAF83y7KQr4oOuN0y1fAF7qIEU9duG56Hy\n0fN8tAhVHtgka7MRsa410Re92IQQgfKT5e5jiC2cCQKBgQDy5X3F/Vn1HWgNxUhf\nds0SYdOYS7xlEi/bpmNl133kW9l1WbMIScuW91+HkzxrX23+NR/2YX/Pi3tG0ae1\nETQ2G4qFG8oVaAK3xtU0opTmOZETeDS909mJTnjrNyY+Yun/dxwlOI8mT1vJ+38S\nmg37WJhgyC4Gt3JiF7xu4W4nBQKBgQC/WYtwUrXs3NCYCN89FqK2q01T26qmid7T\nwj2UahS1lirwGp5CyneG213WzE91QFXK5H+VLNk3rPDc3OWNAUhZC2QOrUI/UGjt\nRulKtabBzOeYmEyKB1c9MHnk1bWGPUWKZVET/gquVcETXPQVW5xfqyXQhsyWSh84\nGNrSQSfsbwKBgGP1IU9LNavzkBCqsV/n6fi4nXU9JaiKVXuU+667galqSxFJ+q1c\ngRX9cyi95M1jFkbY4fBoq0pj4jWArf2LuOrTZqvkhcNNbGDoyHDCv3gHFLbobvv3\npLwmuQhDR8/AsP9aqxB+OBrR6bozb1XeZAadrQeXGanV8JKBpiATUVtpAoGAQo4X\nxPLP2loXp7n2Q946rES6+b7/BTwRKCB4oMWg/GQF/UuU3nBj0KE+a3bW8FZ3QMHn\nanCWARqDEJ84rKnUizw+CijTUQhb5qPygwzZurDVoSrf/GZ/PoY8744xvEZViMSi\nxcxn1Kl5JY4AS+l4Y4I4/eXVBTU01KM4gUcuZrsCgYBWJJX+wpcEhu9XYaOmwDdt\nNhIfJ84/0epnhzoiiLpSpuJq+PzrHSI7o/YqyYtJxLLGItiZtpKBXcsfUok1Rf53\nl6t0LgopjOg4hquCjHLPNrU14PXqC6WahThbKeYXBpdSKC1n7E+9lA4dRmHSnFvq\n7VWZTp/WQlxVOZyK4+V6Aw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "speechtotext@reforzamientoalgebraia.iam.gserviceaccount.com",
+  "client_id": "115054163425805926297",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/speechtotext%40reforzamientoalgebraia.iam.gserviceaccount.com"
+}
