@@ -1,38 +1,50 @@
 <main class="index">
     <header class="fondoia d-flex">
+        <form action="/administracion/profesores/add" method="POST">
 
 
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <div class="cardbody">
+                <div class="w-25 h-25 p-3 container bg-black align-self-center rounded-circle">
+                <div class="row">
+                    <div class="col text-center">
+                        <button onclick="grabar()" class="btn btn-outline-danger align-self-center rounded-circle "
+                            data-toggle="button" aria-pressed="false" autocomplete="off"><i
+                                class="fas fa-microphone fa-8x"></i>
 
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        </button>
 
-        <div class="w-25 h-25 p-3 container bg-black align-self-center rounded-circle">
-            <div class="row">
-                <div class="col text-center">
-                    <button onclick="grabar()" class="btn btn-outline-danger align-self-center rounded-circle "
-                        data-toggle="button" aria-pressed="false" autocomplete="off"><i
-                            class="fas fa-microphone fa-8x"></i>
-
-                    </button>
-
+                    </div>
                 </div>
             </div>
-        </div>
+            </div>
+            
 
 
-        <audio src={{urlBienvenida}} autoplay></audio>
-        {{!-- <script>
-            setTimeout(function () { alert("After 5 seconds!"); }, 5000);
-        </script> --}}
+            <audio src={{urlBienvenida}} autoplay></audio>
+            {{!-- <script>
+                setTimeout(function () { alert("After 5 seconds!"); }, 5000);
+            </script> --}}
 
-        <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 15000)">
-            <source src={{urlPregunta1}} type="audio/mp3" />
-        </audio>
-        {{!--ACA TIENE QUE IR LA PRIJMERA RESPUESTA --}}
-        <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 24000)">
-            <source src={{urlPregunta2}} type="audio/mp3" />
-        </audio>
-        {{!--ACA TIENE QUE IR LA SEGUNDA RESPUESTA --}}
-        
+            <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 15000)">
+                <source src={{urlPregunta1}} type="audio/mp3" />
+            </audio>
+            {{!--ACA TIENE QUE IR LA PRIJMERA RESPUESTA --}}
+            <audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 24000)">
+                <source src={{urlPregunta2}} type="audio/mp3" />
+            </audio>
+            {{!--ACA TIENE QUE IR LA SEGUNDA RESPUESTA --}}
+            <div class="cardbody">
+                
+                    <div class="form-group">
+                        <a href="/alumnos/modulo1-base" class="btn btn-primary m-4">
+                        Empezar Curso!
+                    </a>
+                    </div>
+               
+            </div>
+
+
     </header>
 </main>
