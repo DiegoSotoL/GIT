@@ -14,10 +14,36 @@ router.get('/inicio', async (req, res) => {
 
 });
 router.get('/modulo1-base', async (req, res) => {
+   function aleatorio(minimo, maximo) {
+      return Math.round(Math.random() * (maximo - minimo) + minimo);
+   }
+   console.log('abriendo pagina')
+   ejerciciostipo1 = [1, 2, 3]
+   ejerciciostipo2 = [4, 5, 6]
+   ejerciciostipo3 = [7, 8, 9, 10]
+   base1 = aleatorio(1, 3)
+   base2 = aleatorio(4, 6)
+   base3 = aleatorio(7, 10)
+   index1 = ejerciciostipo1.indexOf(base1)
+   index2 = ejerciciostipo2.indexOf(base2)
+   index3 = ejerciciostipo3.indexOf(base3)
 
-
-   res.render('curso_alumno/modulo1-base');
-
+   if (index1 > -1) {
+      ejerciciostipo1.splice(index1, 1);
+   }
+   if (index2 > -1) {
+      ejerciciostipo2.splice(index2, 1);
+   }
+   if (index3 > -1) {
+      ejerciciostipo3.splice(index3, 1);
+   }
+   ejerciciosbase = [base1, base2, base3]
+   console.log('ejercicios random: ' + ejerciciosbase)
+   console.log('ejercicios1: ' + ejerciciostipo1)
+   console.log('ejercicios2: ' + ejerciciostipo2)
+   console.log('ejercicios3: ' + ejerciciostipo3)
+   
+   res.render('curso_alumno/modulo1-base', { ej1: ejerciciosbase[0], ej2:ejerciciosbase[1], ej3:ejerciciosbase[2] });
 
 });
 router.post('/modulo1-base', async (req, res) => {
@@ -40,7 +66,36 @@ router.post('/modulo1-adaptado', async (req, res) => {
       r06
    };
    console.log(respuestas02);
-   res.render('curso_alumno/modulo2-1-base');
+   function aleatorio(minimo, maximo) {
+      return Math.round(Math.random() * (maximo - minimo) + minimo);
+   }
+   console.log('abriendo pagina')
+   ejerciciostipo1 = [1, 2, 3,4]
+   ejerciciostipo2 = [5, 6, 7, 8]
+   ejerciciostipo3 = [9, 10]
+   base1 = aleatorio(1, 4)
+   base2 = aleatorio(5, 8)
+   base3 = aleatorio(9, 10)
+   index1 = ejerciciostipo1.indexOf(base1)
+   index2 = ejerciciostipo2.indexOf(base2)
+   index3 = ejerciciostipo3.indexOf(base3)
+
+   if (index1 > -1) {
+      ejerciciostipo1.splice(index1, 1);
+   }
+   if (index2 > -1) {
+      ejerciciostipo2.splice(index2, 1);
+   }
+   if (index3 > -1) {
+      ejerciciostipo3.splice(index3, 1);
+   }
+   ejerciciosbase = [base1, base2, base3]
+   console.log('ejercicios random: ' + ejerciciosbase)
+   console.log('ejercicios1: ' + ejerciciostipo1)
+   console.log('ejercicios2: ' + ejerciciostipo2)
+   console.log('ejercicios3: ' + ejerciciostipo3)
+   
+   res.render('curso_alumno/modulo2-1-base', { ej1: ejerciciosbase[0], ej2:ejerciciosbase[1], ej3:ejerciciosbase[2] });
 
 
 });
@@ -63,7 +118,36 @@ router.post('/modulo2-1-adaptado', async (req, res) => {
       r12
    };
    console.log(respuestas04);
-   res.render('curso_alumno/modulo2-2-base');
+   function aleatorio(minimo, maximo) {
+      return Math.round(Math.random() * (maximo - minimo) + minimo);
+   }
+   console.log('abriendo pagina')
+   ejerciciostipo1 = [1, 2, 3]
+   ejerciciostipo2 = [4, 5, 6, 7]
+   ejerciciostipo3 = [8, 9, 10]
+   base1 = aleatorio(1, 3)
+   base2 = aleatorio(4, 7)
+   base3 = aleatorio(8, 10)
+   index1 = ejerciciostipo1.indexOf(base1)
+   index2 = ejerciciostipo2.indexOf(base2)
+   index3 = ejerciciostipo3.indexOf(base3)
+
+   if (index1 > -1) {
+      ejerciciostipo1.splice(index1, 1);
+   }
+   if (index2 > -1) {
+      ejerciciostipo2.splice(index2, 1);
+   }
+   if (index3 > -1) {
+      ejerciciostipo3.splice(index3, 1);
+   }
+   ejerciciosbase = [base1, base2, base3]
+   console.log('ejercicios random: ' + ejerciciosbase)
+   console.log('ejercicios1: ' + ejerciciostipo1)
+   console.log('ejercicios2: ' + ejerciciostipo2)
+   console.log('ejercicios3: ' + ejerciciostipo3)
+   
+   res.render('curso_alumno/modulo2-2-base', { ej1: ejerciciosbase[0], ej2:ejerciciosbase[1], ej3:ejerciciosbase[2] });
 
 
 });
