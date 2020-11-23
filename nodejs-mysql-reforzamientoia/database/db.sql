@@ -81,9 +81,9 @@ CREATE TABLE unidades(
 );
 CREATE TABLE preguntas(
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    pregunta VARCHAR(100) NOT NULL,
-    nivel VARCHAR(60) NOT NULL,
-    ruta_imagen VARCHAR(60) NOT NULL,
+    respuesta VARCHAR(60) NOT NULL,
+    modulo VARCHAR(60) NOT NULL,
+    tipo VARCHAR(60) NOT NULL,
     fecha_creacion timestamp NOT NULL DEFAULT current_timestamp,
     id_unidad INT(11),
     CONSTRAINT fk_unidad_pregunta FOREIGN KEY (id_unidad) REFERENCES unidades(id)

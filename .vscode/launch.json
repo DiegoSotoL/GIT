@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\nodejs-mysql-reforzamientoia\\src\\speechtotext.js"
+            "program": "${workspaceFolder}\\nodejs-mysql-reforzamientoia\\src\\routes\\curso_alumno.js"
+            
         }
     ]
 }

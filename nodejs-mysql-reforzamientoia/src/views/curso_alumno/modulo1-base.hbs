@@ -1,7 +1,7 @@
 <h1 class="text-center">Modulo 1.1 : Patrones</h1>
 <form action="/alumnos/modulo1-base" method="POST">
   <div class="contenedor">
-
+    
     <div class="card text-center mx-auto" style="width: 50rem;">
       <div class="card-body">
 
@@ -14,6 +14,8 @@
         </div>
         <div class="form-group">
           <input type="text" name="r01" class="form-control" placeholder="Respuesta" autofocus>
+          <input type="hidden" name="p01" value="{{ej1}}">
+          <input type="hidden" name="restantes1" value="{{restantes1}}">
         </div>
 
 
@@ -35,11 +37,14 @@
           <div class="card-header">Ejercicio 2</div>
           <div class="card-body">
             <img src="/img/modulo1/{{ej2}}.png" >
+            
           </div>
 
         </div>
         <div class="form-group">
           <input type="text" name="r02" class="form-control" placeholder="Respuesta" autofocus>
+          <input type="hidden" name="p02" value="{{ej2}}">
+          <input type="hidden" name="restantes2" value="{{restantes2}}">
         </div>
 
 
@@ -65,6 +70,8 @@
         </div>
         <div class="form-group">
           <input type="text" name="r03" class="form-control" placeholder="Respuesta" autofocus>
+          <input type="hidden" name="p03" value="{{ej3}}">
+          <input type="hidden" name="restantes3" value="{{restantes3}}">
         </div>
 
 
