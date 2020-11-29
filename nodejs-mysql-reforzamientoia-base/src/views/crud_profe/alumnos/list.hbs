@@ -1,0 +1,31 @@
+<div class="container p-4">
+    <div class="row">
+        {{#each alumnos}}
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class = "card-title text-uppercase">
+                            {{nombre_completo}}  
+                        </h3>
+                        <p style="font-size:14px; color:#db330f">{{timeago fecha_creacion}}</p>
+                        <p class = "m-2">{{rut}}</p>
+                        <p class = "m-2">{{telefono}}</p>
+                        <p class = "m-2">{{correo}}</p>
+                        <p class = "m-2">{{id_curso}}</p>
+                        <a href="/profesores/alumnos/delete/{{id}}"class ="btn btn-danger">BORAR</a>
+                        <a href="/profesores/alumnos/edit/{{id}}"class ="btn btn-secondary">EDITAR</a>
+                        <P></P>
+                        <a href="/profesores/notas/"class ="btn btn-secondary">AGREGAR NOTAS</a>
+                    </div>    
+                </div>
+            </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>NO HAY ALUMNOS REGISTRADOS</p>
+                    <a href="/profesores/alumnos/add/">REGISTRAR</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

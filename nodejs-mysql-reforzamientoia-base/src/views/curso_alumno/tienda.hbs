@@ -1,0 +1,47 @@
+<div style="float:right;width:100px;height:100px;margin: 8%;margin-top: 300px;">
+<img src="/img/bolsa.png"style="float:left;width:100px;height:100px;">
+<h4>Creditos: ${{puntos}}</h4>
+</div>
+<div style="float:left;width:100px;height:100px;margin: 8%;margin-top: 300px;">
+<img src="/img/cofre.png"style="float:left;width:100px;height:100px;">
+<a href="/alumnos/tienda/misobjetos/1" class="btn btn-primary m-7">
+                        Ver mis objetos!
+                    </a>
+</div>
+
+<br>
+
+<div class="contenedor">
+    <div class="container p-4">
+        <div class="row">
+            {{#each avatares}}
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title text-uppercase">
+                            {{nombre}}
+                        </h4>
+                        <img src="/img/avatares/{{id}}.png">
+                        <p class="m-2">Precio: ${{precio}}</p>
+                        <input type="hidden" name="precio" value="{{precio}}">
+
+
+                        
+                        <a href="/alumnos/tienda/canjear/{{id}}"class ="btn btn-primary">CANJEAR</a>
+
+
+
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>NO HAY PROFESORES REGISTRADOS</p>
+                    <a href="/administracion/profesores/add">REGISTRAR</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

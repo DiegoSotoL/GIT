@@ -1,0 +1,37 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center">
+                <input type="hidden" id="userRut" value="{{user.rut}}">
+                <div class="card-body">
+                    {{#ifEquals user.tipo 1}} {{!-- administrador --}}
+                    <h4>Bienvenido {{user.nombre_completo}}</h4>
+                    <a href="/administracion/colegios" class="btn btn-primary m-4">
+                        Empieza ingresando un colegio!
+                    </a>
+                    {{/ifEquals}}
+                    {{#ifEquals user.tipo 2}}{{!-- profesor --}}
+                    <h4>Bienvenido {{user.nombre_completo}}</h4>
+                    <a href="/profesores/alumnos/add" class="btn btn-primary m-4">
+                        Empieza ingresando un alumno!
+                    </a>
+                    {{/ifEquals}}
+                    {{#ifEquals user.tipo 3}}{{!-- alumno --}}
+                    <img src="/img/avatares/{{idAvatar}}.png" class="rounded-circle">
+                    <p hidden>{{ttsBienvenida}}</p>
+                    <p hidden>{{ttsPregunta1}}</p>
+                    <p hidden>{{ttsPregunta2}}</p>
+                    <h4>Bienvenido {{user.nombre_completo}} al reforzamiento de la segunda unidad de matematicas "Inicio
+                        en el álgebra"</h4>
+                    <a href="/alumnos/inicio" class="btn btn-primary m-4" >
+
+                        Empecemos
+                    </a>
+                    {{/ifEquals}}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

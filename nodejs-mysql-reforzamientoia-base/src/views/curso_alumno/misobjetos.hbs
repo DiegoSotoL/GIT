@@ -1,0 +1,31 @@
+<div class="contenedor">
+    <div class="container p-4">
+        <div class="row">
+            {{#each avatares}}
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h4 class="card-title text-uppercase">
+                            {{nombre}}
+                        </h4>
+                        <img src="/img/avatares/{{id_avatar}}.png">
+                        
+                                             
+                        <a href="/alumnos/tienda/usar/{{id_avatar}}"class ="btn btn-primary">USAR</a>
+
+
+
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>NO HAY PROFESORES REGISTRADOS</p>
+                    <a href="/administracion/profesores/add">REGISTRAR</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

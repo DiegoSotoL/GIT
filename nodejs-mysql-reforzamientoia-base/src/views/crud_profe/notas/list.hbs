@@ -1,0 +1,30 @@
+<div class="container p-4">
+    <div class="row">
+        {{#each notas}}
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class = "card-title text-uppercase">
+                            {{id_alumno}}  
+                        </h3>
+                        <p style="font-size:14px; color:#db330f">{{timeago fecha_creacion}}</p>
+                        <p class = "m-2">{{nombre_actividad}}</p>
+                        <p class = "m-2">{{clasificacion}}</p>
+                        <p class = "m-2">{{id_asignatura}}</p>
+                        
+                        <a href="/profesores/notas/delete/{{id}}"class ="btn btn-danger">BORAR</a>
+                        <a href="/profesores/notas/edit/{{id}}"class ="btn btn-secondary">EDITAR</a>
+                        
+                    </div>    
+                </div>
+            </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>EL ALUMNO NO REGISTRA NOTAS</p>
+                    <a href="/profesores/notas/add/{{id}}">AGREGAR NOTAS</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
