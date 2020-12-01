@@ -4,6 +4,7 @@ const {google} = require('googleapis')
 const keys = require('../../apikeys/keys.json')
 const pool = require ('../database');
 const { isLoggedIn } = require('../lib/auth');
+const nodemailer = require("nodemailer");
 var respuestas01, respuestas02, respuestas03, respuestas04, respuestas05;
 var resultados = [];
 var motivacionIntrinseca
@@ -323,7 +324,7 @@ router.post('/modulo1-base', async (req, res) => {
 });
 /* acaaaaaaaaaaaa */
 router.post('/modulo1-adaptado', async (req, res) => {
-   const { r04, r04b, r05, r05b, r06, r06b, p04, p04b, p05, p05b, p06, p06b, } = req.body;
+   const { r04, r04b, r05, r05b, r06, r06b, p04, p04b, p05, p05b, p06, p06b, responder1,responder2,responder3} = req.body;
    respuestas02 = {
       r04,
       r04b,
@@ -336,16 +337,26 @@ router.post('/modulo1-adaptado', async (req, res) => {
       p05,
       p05b,
       p06,
-      p06b
+      p06b,
+      responder1,
+      responder2,
+      responder3
    };
    console.log(respuestas02);
    var respuestasUser = [false, false, false]
-   corregirModulo1(r04, p04, 1)
-   corregirModulo1(r05, p05, 2)
-   corregirModulo1(r06, p06, 3)
-   corregirModulo1(r04b, p04b, 1)
-   corregirModulo1(r05b, p05b, 2)
-   corregirModulo1(r06b, p06b, 3)
+   if(responder1=='block'){
+      corregirModulo1(r04, p04, 1)
+      corregirModulo1(r04b, p04b, 1)
+   }
+   if(responder2=='block'){
+      corregirModulo1(r05, p05, 2)
+      corregirModulo1(r05b, p05b, 2)
+   }
+   if(responder3=='block'){
+      corregirModulo1(r06, p06, 3)
+      corregirModulo1(r06b, p06b, 3)
+   }
+
 
    async function corregirModulo1(respuesta, ejercicio, tipo) {
       const respuestaCorrecta = await pool.query('SELECT respuesta FROM preguntas WHERE num_ej = ' + ejercicio + ' AND modulo = 1 AND tipo= ' + tipo);
@@ -354,6 +365,7 @@ router.post('/modulo1-adaptado', async (req, res) => {
       var respuestaBuena = resultArray[0].respuesta
       console.log(respuesta)
       console.log(respuestaBuena)
+      console.log()
       if (respuesta == respuestaBuena) {
          resultados.push([ejercicio, 1, true])
       } else {
@@ -517,7 +529,7 @@ router.post('/modulo2-1-base', async (req, res) => {
 });
 router.post('/modulo2-1-adaptado', async (req, res) => {
 
-   const { r10, r10b, r11, r11b, r12, r12b,p10, p10b, p11, p11b, p12, p12b } = req.body;
+   const { r10, r10b, r11, r11b, r12, r12b,p10, p10b, p11, p11b, p12, p12b,responder1,responder2,responder3 } = req.body;
    respuestas04 = {
       r10,
       r10b,
@@ -530,15 +542,25 @@ router.post('/modulo2-1-adaptado', async (req, res) => {
       p11,
       p11b,
       p12,
-      p12b
+      p12b,
+      responder1,
+      responder2,
+      responder3
    };
    console.log(respuestas04);
-   corregirModulo1(r10, p10, 1)
-   corregirModulo1(r11, p11, 2)
-   corregirModulo1(r12, p12, 3)
-   corregirModulo1(r10b, p10b, 1)
-   corregirModulo1(r11b, p11b, 2)
-   corregirModulo1(r12b, p12b, 3)
+
+   if(responder1=='block'){
+      corregirModulo1(r10, p10, 1)
+      corregirModulo1(r10b, p10b, 1)
+   }
+   if(responder2=='block'){
+      corregirModulo1(r11, p11, 2)
+      corregirModulo1(r11b, p11b, 2)
+   }
+   if(responder3=='block'){
+      corregirModulo1(r12, p12, 3)
+      corregirModulo1(r12b, p12b, 3)
+   }
 
    async function corregirModulo1(respuesta, ejercicio, tipo) {
       const respuestaCorrecta = await pool.query('SELECT respuesta FROM preguntas WHERE num_ej = ' + ejercicio + ' AND modulo = 2 AND tipo= ' + tipo);
@@ -671,7 +693,24 @@ router.post('/modulo2-2-base', async (req, res) => {
 
 });
 router.post('/modulo2-2-adaptado', async (req, res) => {
-   const { r16, r16b, r17, r17b, r18,p16, p16b, p17, p17b, p18} = req.body;
+   var transporter = nodemailer.createTransport({
+      host : 'smtp.gmail.com',
+      post : 587,
+      secure : false,
+      auth : {
+         user : 'reforzamientoia2@gmail.com',
+         pass : 'dsl159951'
+      }
+
+   });
+   var mailOptions = {
+      from :"reforzamientoia2@gmail.com",
+      to : "diego.soto.lete@gmail.com",
+      subject : "Resultados reforzamiento",
+      text : "dasasdasd"
+   }
+   
+   const { r16, r16b, r17, r17b, r18,p16, p16b, p17, p17b, p18,responder1,responder2,responder3} = req.body;
    respuestas06 = {
       r16,
       r16b,
@@ -682,15 +721,25 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       p16b,
       p17,
       p17b,
-      p18
+      p18,
+      responder1,
+      responder2,
+      responder3
    };
+   if(responder1=='block'){
+      corregirModulo3(r16, p16, 1)
+      corregirModulo3(r16b, p16b, 1)
+   }
+   if(responder2=='block'){
+      corregirModulo3(r17, p17, 2)
+      corregirModulo3(r17b, p17b, 2)
+   }
+   if(responder3=='block'){
+      corregirModulo3(r18, p18, 3)
+   }
    
    var respuestasUser = [false, false, false]
-   corregirModulo3(r16, p16, 1)
-   corregirModulo3(r17, p17, 2)
-   corregirModulo3(r18, p18, 3)
-   corregirModulo3(r16b, p16b, 1)
-   corregirModulo3(r17b, p17b, 2)
+   
    var puntos = 0
    var puntosExtra =0
 
@@ -722,7 +771,59 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
             
       pool.query('UPDATE users SET puntos='+puntos+' WHERE rut = 190153118')
    }, 1000);
+   /*armar email*/
    
+   const nombreProfesor = await pool.query('SELECT nombre_completo FROM profesores WHERE id_curso = 1');
+   resultArray = JSON.parse(JSON.stringify(nombreProfesor));
+   var nomPofe = resultArray[0].nombre_completo
+   
+   const nombreAlumno = await pool.query('SELECT nombre_completo FROM users WHERE rut = 190153118');
+   resultArray2 = JSON.parse(JSON.stringify(nombreAlumno));
+   var nomAlumno = resultArray2[0].nombre_completo
+   
+      setTimeout(() => {
+       mailOptions.text='Hola '+nomPofe+' su Alumno '+nomAlumno+' ha finalizado el curso de reforzamiento de las egunda unidad "Introduccion al Algerba". A continuación se le detallara como ha sido el proceso y los factores que hemos rescatado de este:\n'
+      if(motivacionIntrinseca){
+         mailOptions.text=mailOptions.text.concat('El Alumno ha demostrado que presenta interés en el estudio de la materia.\n')  
+      }else{
+         mailOptions.text=mailOptions.text.concat('El Alumno ha demostrado que su motivacion en el aula viene de agentes externos.\n')
+      }
+      var buenas=0, malas=0,modulo1buenas=0,modulo2buenas=0,modulo3buenas=0
+      for (i=0;i<resultados.length;i++){
+         if(resultados[i][2]){
+           buenas++
+         }else{
+            malas ++ 
+         }
+         if(resultados[i][2]&& resultados[i][1]==1){
+            modulo1buenas++
+         }
+         if(resultados[i][2]&& resultados[i][1]==2){
+            modulo2buenas++
+         }
+         if(resultados[i][2]&& resultados[i][1]==3){
+            modulo3buenas++
+         }
+        
+      }
+      mailOptions.text=mailOptions.text.concat('Resultados:\nEl estudiante de un total de '+resultados.length+' preguntas ha respondido '+buenas+' preguntas correctamente '+malas+' respuestas incorrectas.\nDe las '+buenas+' respuestas correctas '+modulo1buenas+' corresponden al primer modulo de la unidad "Patrones", '+modulo2buenas+' corresponde al segundo modulo "Resolucion de ecuaciones" y '+modulo3buenas+' corresponden al tercer modulo "Problemas de planteo".')
+      console.log('buenas:'+buenas)
+      console.log('malas:'+malas)
+      console.log('mod1:'+modulo1buenas)
+      console.log('mod2:'+modulo2buenas)
+      console.log('mod3:'+modulo3buenas)
+      
+       
+      
+       transporter.sendMail(mailOptions, (error,info)=>{
+      if(error){
+         res.status(500).send(error.message)
+      }else{
+         console.log('email enviado')
+         res.status(200).jsonp(req.body)
+      }
+   })
+   }, 3000);
    setTimeout(() => { res.render('curso_alumno/resultados', {puntos:puntosExtra,imi:motivacionIntrinseca})}, 1000);
 });
 

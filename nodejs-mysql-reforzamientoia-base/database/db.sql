@@ -65,7 +65,7 @@ CREATE TABLE profesores(
     correo VARCHAR(60) NOT NULL,
     fecha_creacion timestamp NOT NULL DEFAULT current_timestamp,
     id_curso INT(11),
-    CONSTRAINT fk_curso_profesor FOREIGN KEY (id_curso) REFERENCES cursos(id)
+    CONSTRAINT fk_asignatura_profesor FOREIGN KEY (id_asignatura) REFERENCES asignaturas(id)
 
 );
 
