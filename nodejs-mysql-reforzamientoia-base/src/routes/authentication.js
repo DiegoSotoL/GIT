@@ -66,9 +66,11 @@ router.get('/logout', isLoggedIn,(req, res) => {
 });
 
 router.get('/profile', isLoggedIn, async (req, res) => {
-    const rows = await pool.query('SELECT * FROM users WHERE rut = 190153118');
+    
+    console.log(req.user.id)
+    const rows = await pool.query('SELECT * FROM users WHERE id = '+req.user.id);
     user = rows [0];
-    res.render('profile',{idAvatar: user.idAvatar});
+    res.render('profile',{idAvatar: user.idAvatar,userID:user.id});
 });
 
 module.exports = router;

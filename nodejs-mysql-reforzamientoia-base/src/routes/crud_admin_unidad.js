@@ -5,12 +5,18 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/unidades/add', (req,res) =>{
-   res.render('crud_admin/unidades/add');
+router.get('/unidades/add', async (req,res) =>{
+   const asignaturas = await pool.query('SELECT * FROM asignaturas');
+   res.render('crud_admin/unidades/add',{asignaturas:asignaturas});
 });
 
 router.post('/unidades/add', async (req,res) =>{
-   const { nombre_unidad,id_asignatura} = req.body;
+   function getID(val){
+      id = val.charAt(0)
+      return id
+   }
+   const {nombre_unidad} = req.body;
+   const id_asignatura = getID(req.body.id_asignatura)
    const unidadNueva ={
       nombre_unidad,
       id_asignatura
@@ -22,7 +28,22 @@ router.post('/unidades/add', async (req,res) =>{
 
  router.get('/unidades', async (req,res) => {
    const unidades = await pool.query('SELECT * FROM unidades');
-   res.render('crud_admin/unidades/list',{ unidades });
+   resultArray = JSON.parse(JSON.stringify(unidades));
+
+
+  var nombresAsignaturas = []
+
+  for (i = 0; i < resultArray.length; i++) {
+    console.log(resultArray[i].id_asignatura)
+    nombre = await pool.query('SELECT nombre_asignatura FROM asignaturas WHERE id = ' + resultArray[i].id_asignatura);
+    nombresAsignaturas.push(nombre)
+
+  }
+  for (i = 0; i < nombresAsignaturas.length; i++) {
+    console.log(nombresAsignaturas[i][0].nombre_asignatura)
+    resultArray[i].id_asignatura = nombresAsignaturas[i][0].nombre_asignatura
+  }
+   res.render('crud_admin/unidades/list',{ unidades:resultArray });
  });
 
  router.get('/unidades/delete/:id', async(req,res) => {

@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 const {google} = require('googleapis')
 const keys = require('../../apikeys/keys.json')
@@ -9,6 +10,7 @@ var respuestas01, respuestas02, respuestas03, respuestas04, respuestas05;
 var resultados = [];
 var motivacionIntrinseca
 var creditosUsuario =0
+var rutUser = ''; 
 const client = new google.auth.JWT(
    keys.client_email,
    null,
@@ -52,10 +54,13 @@ async function gsrun(client,rut){
 
 
 
-router.get('/inicio', async (req, res) => {
+router.get('/inicio/:id', async (req, res) => {
    
    
-   res.render('curso_alumno/inicio');
+   const rows = await pool.query('SELECT * FROM users WHERE id = '+req.user.id);
+   user = rows [0];
+   rutUser=user.rut
+   res.render('curso_alumno/inicio',{idUser : req.params.id});
 
 
 });
@@ -64,7 +69,7 @@ router.get('/tienda', async (req, res) => {
    
 
    avatares = await pool.query('SELECT * FROM avatares');
-   const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut = 190153118');
+   const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut ='+rutUser);
    resultPuntos = JSON.parse(JSON.stringify(puntosUser));
    puntos = resultPuntos[0].puntos
    
@@ -86,13 +91,13 @@ router.get('/tienda/misobjetos/:id', async (req, res) => {
 
 });
 router.get('/tienda/usar/:id', async(req,res) => {
-   pool.query('UPDATE users SET idAvatar='+req.params.id+' WHERE rut = 190153118')
+   pool.query('UPDATE users SET idAvatar='+req.params.id+' WHERE rut ='+rutUser)
    
    res.redirect('/profile') 
 });
 router.get('/tienda/canjear/:id', async(req,res) => {
    console.log(req.params.id)
-   const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut = 190153118');
+   const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut ='+rutUser);
    resultPuntos = JSON.parse(JSON.stringify(puntosUser));
    puntos = resultPuntos[0].puntos
    const costoAvatar= await pool.query('SELECT precio FROM avatares WHERE id = '+req.params.id);
@@ -102,10 +107,10 @@ router.get('/tienda/canjear/:id', async(req,res) => {
    
    if(costo<=puntos){
       puntos = puntos-costo
-      pool.query('UPDATE users SET puntos='+puntos+' WHERE rut = 190153118')
-      pool.query('UPDATE users SET idAvatar='+req.params.id+' WHERE rut = 190153118')
+      pool.query('UPDATE users SET puntos='+puntos+' WHERE rut = '+rutUser)
+      pool.query('UPDATE users SET idAvatar='+req.params.id+' WHERE rut ='+rutUser)
       const id_avatar = req.params.id;
-      const idUser2 = await pool.query('SELECT id FROM users WHERE rut = 190153118');
+      const idUser2 = await pool.query('SELECT id FROM users WHERE rut ='+rutUser);
       const id_user = idUser2[0].id
       const insertAvatar ={
          id_avatar,
@@ -113,7 +118,8 @@ router.get('/tienda/canjear/:id', async(req,res) => {
       };
       await pool.query('INSERT INTO avataresuser set ?', [insertAvatar]);
    }else{
-      console.log('saldo insuficiente')
+      req.flash('message','NO SE HA REALIZADO EL CANJE: SALDO INSUFICIENTE')
+
       /* mensaje alerta */
    }
 
@@ -125,12 +131,12 @@ router.get('/tienda/canjear/:id', async(req,res) => {
    */
    res.redirect('/alumnos/tienda') 
 });
-router.get('/modulo1-base', async (req, res) => {
+router.get('/modulo1-base/:id', async (req, res) => {
    
-   const user = {rut:'190153118'}
-   rut= user.rut
+   
+    console.log('rut: '+rutUser)
    sumaPuntajes =0
-   var IMI = gsrun(client, rut).then(r =>{
+   var IMI = gsrun(client, rutUser).then(r =>{
       puntajesIntrinseco = [r[4],r[5],r[8]]
       puntajesExtrinseco = [r[6],r[7]]
       for(i=0;i<puntajesIntrinseco.length;i++){
@@ -151,10 +157,10 @@ router.get('/modulo1-base', async (req, res) => {
       console.log('suma:'+sumaPuntajes)
       if(sumaPuntajes>0){
          motivacionIntrinseca= true;
-         pool.query('UPDATE users SET imi = 0 WHERE rut = 190153118')
+         pool.query('UPDATE users SET imi = 0 WHERE rut ='+rutUser)
       }else{
          motivacionIntrinseca=false;
-         pool.query('UPDATE users SET imi = 1 WHERE rut = 190153118')
+         pool.query('UPDATE users SET imi = 1 WHERE rut ='+rutUser)
       }
       
       console.log('motivacion intrinseca:' + motivacionIntrinseca)
@@ -746,7 +752,7 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
    async function corregirModulo3(respuesta, ejercicio, tipo) {
       const respuestaCorrecta = await pool.query('SELECT respuesta FROM preguntas WHERE num_ej = ' + ejercicio + ' AND modulo = 3 AND tipo= ' + tipo);
       resultArray = JSON.parse(JSON.stringify(respuestaCorrecta));
-      const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut = 190153118');
+      const puntosUser= await pool.query('SELECT puntos FROM users WHERE rut ='+rutUser);
       resultPuntos = JSON.parse(JSON.stringify(puntosUser));
 
       var respuestaBuena = resultArray[0].respuesta
@@ -769,7 +775,7 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       }
       puntos=puntos+puntosExtra
             
-      pool.query('UPDATE users SET puntos='+puntos+' WHERE rut = 190153118')
+      pool.query('UPDATE users SET puntos='+puntos+' WHERE rut ='+rutUser)
    }, 1000);
    /*armar email*/
    
@@ -777,7 +783,7 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
    resultArray = JSON.parse(JSON.stringify(nombreProfesor));
    var nomPofe = resultArray[0].nombre_completo
    
-   const nombreAlumno = await pool.query('SELECT nombre_completo FROM users WHERE rut = 190153118');
+   const nombreAlumno = await pool.query('SELECT nombre_completo FROM users WHERE rut = '+rutUser);
    resultArray2 = JSON.parse(JSON.stringify(nombreAlumno));
    var nomAlumno = resultArray2[0].nombre_completo
    

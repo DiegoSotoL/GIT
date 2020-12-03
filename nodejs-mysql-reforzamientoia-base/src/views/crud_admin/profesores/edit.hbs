@@ -3,7 +3,7 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/administracion/profesores/edit/{{profesor.id}}" method="POST">
+                    <form action="/administracion/profesores/edit/{{profesor.id}}" method="POST"autocomplete="off">
                         <div class="form-group">
                             <input type="text" value = "{{profesor.rut}}" name="rut" class="form-control" placeholder="Rut" autofocus>
                         </div>
@@ -17,7 +17,7 @@
                             <input type="text" value = "{{profesor.correo}}" name="correo" class="form-control" placeholder="Correo" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{profesor.id_curso}}" name="id_curso" class="form-control" placeholder="ID Curso" autofocus>
+                            <input type="text" readonly="readonly"  value = "{{profesor.id_curso}}" name="id_curso" class="form-control" placeholder="ID Curso" autofocus>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">

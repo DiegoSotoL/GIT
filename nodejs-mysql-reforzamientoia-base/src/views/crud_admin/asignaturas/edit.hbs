@@ -3,7 +3,7 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/administracion/asignaturas/edit/{{asignatura.id}}" method="POST">
+                    <form action="/administracion/asignaturas/edit/{{asignatura.id}}" method="POST"autocomplete="off">
                         <div class="form-group">
                             <input type="text" value = "{{asignatura.nombre_asignatura}}" name="nombre_asignatura" class="form-control" placeholder="Nombre Asignatura"
                                 autofocus>
@@ -13,7 +13,8 @@
                                 placeholder="Promedio" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{asignatura.id_profesor}}" name="id_profesor" class="form-control" placeholder="ID Profesor"
+                            
+                            <input type="text" readonly="readonly"  value = "{{asignatura.id_profesor}}" name="id_profesor" class="form-control" placeholder="ID Profesor"
                                 autofocus>
                         </div>
                         <div class="form-group">

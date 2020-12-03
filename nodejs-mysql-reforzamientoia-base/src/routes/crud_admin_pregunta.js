@@ -3,12 +3,18 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/preguntas/add', isLoggedIn, (req,res) =>{
-   res.render('crud_admin/preguntas/add');
+router.get('/preguntas/add', isLoggedIn, async (req,res) =>{
+   const unidades = await pool.query('SELECT * FROM unidades');
+   res.render('crud_admin/preguntas/add',{unidades:unidades});
 });
 
 router.post('/preguntas/add', isLoggedIn, async (req,res) =>{
-   const { pregunta,nivel,ruta_imagen,id_unidad} = req.body;
+   function getID(val){
+      id = val.charAt(0)
+      return id
+   }
+   const { pregunta,nivel,ruta_imagen} = req.body;
+   const id_unidad = getID(req.body.id_unidad)
    const preguntaNueva ={
       pregunta,
       nivel,

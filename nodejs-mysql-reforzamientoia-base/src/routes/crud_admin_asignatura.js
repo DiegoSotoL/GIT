@@ -6,12 +6,19 @@ const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
 
-router.get('/asignaturas/add', isLoggedIn, (req,res) =>{
-   res.render('crud_admin/asignaturas/add');
+router.get('/asignaturas/add', isLoggedIn, async (req,res) =>{
+   const profesores = await pool.query('SELECT * FROM profesores');
+
+   res.render('crud_admin/asignaturas/add',{profesores:profesores});
 });
 
 router.post('/asignaturas/add', isLoggedIn, async (req,res) =>{
-   const { nombre_asignatura,promedio,id_profesor} = req.body;
+   function getID(val){
+      id = val.charAt(0)
+      return id
+   }
+   const { nombre_asignatura,promedio} = req.body;
+   const id_profesor = getID(req.body.id_profesor)
    const asignaturaNueva ={
       nombre_asignatura,
       promedio,
@@ -24,7 +31,22 @@ router.post('/asignaturas/add', isLoggedIn, async (req,res) =>{
 
  router.get('/asignaturas', isLoggedIn, async (req,res) => {
    const asignaturas = await pool.query('SELECT * FROM asignaturas');
-   res.render('crud_admin/asignaturas/list',{ asignaturas });
+   resultArray = JSON.parse(JSON.stringify(asignaturas));
+
+
+  var nombresProfesores = []
+
+  for (i = 0; i < resultArray.length; i++) {
+    console.log(resultArray[i].id_profesor)
+    nombre = await pool.query('SELECT nombre_completo FROM profesores WHERE id = ' + resultArray[i].id_profesor);
+    nombresProfesores.push(nombre)
+
+  }
+  for (i = 0; i < nombresProfesores.length; i++) {
+    console.log(nombresProfesores[i][0].nombre_completo)
+    resultArray[i].id_profesor = nombresProfesores[i][0].nombre_completo
+  }
+   res.render('crud_admin/asignaturas/list',{ asignaturas:resultArray});
  });
 
  router.get('/asignaturas/delete/:id', isLoggedIn, async(req,res) => {
@@ -36,11 +58,12 @@ router.post('/asignaturas/add', isLoggedIn, async (req,res) =>{
 });
 
 router.get('/asignaturas/edit/:id', isLoggedIn, async (req,res) => {
+   const profesores = await pool.query('SELECT * FROM profesores');
    console.log(req.params.nombre);
    const { id } = req.params;
    const asignaturas = await pool.query('SELECT * FROM asignaturas WHERE id = ?', [id] );
    console.log(asignaturas[0]);
-   res.render('crud_admin/asignaturas/edit', {asignatura : asignaturas[0]});
+   res.render('crud_admin/asignaturas/edit', {asignatura : asignaturas[0],profesores:profesores});
 });
 router.post('/asignaturas/edit/:id', isLoggedIn, async ( req , res ) => {
    const{id} = req.params;

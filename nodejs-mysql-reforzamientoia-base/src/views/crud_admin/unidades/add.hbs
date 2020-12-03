@@ -3,14 +3,20 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/administracion/unidades/add" method="POST">
+                    <form action="/administracion/unidades/add" method="POST"autocomplete="off">
                         <div class="form-group">
                             <input type="text" name="nombre_unidad" class="form-control" placeholder="Nombre Unidad"
                                 autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="id_asignatura" class="form-control" placeholder="ID Asignatura"
-                                autofocus>
+                            <input list="browsers" class="form-control" name="id_asignatura" id="browser"
+                                placeholder="Asignatura">
+                            <datalist id="browsers">
+                                {{#each asignaturas}}
+                                <option value={{id}}-{{nombre_asignatura}}>
+                                    {{/each}}
+                            </datalist>
+                            
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">

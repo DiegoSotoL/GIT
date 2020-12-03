@@ -5,12 +5,18 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/alumnos/add', (req,res) =>{
-   res.render('crud_profe/alumnos/add');
+router.get('/alumnos/add', async (req,res) =>{
+   const cursos = await pool.query('SELECT * FROM cursos');
+   res.render('crud_profe/alumnos/add',{cursos:cursos});
 });
 
 router.post('/alumnos/add', async (req,res) =>{
-   const { rut,nombre_completo,telefono,correo,id_curso} = req.body;
+   function getID(val){
+      id = val.charAt(0)
+      return id
+   }
+   const { rut,nombre_completo,telefono,correo} = req.body;
+   const id_curso = getID(req.body.id_curso)
    const alumnoNuevo ={
       rut,
       nombre_completo,
@@ -25,7 +31,22 @@ router.post('/alumnos/add', async (req,res) =>{
 
  router.get('/alumnos', async (req,res) => {
    const alumnos = await pool.query('SELECT * FROM alumnos');
-   res.render('crud_profe/alumnos/list',{ alumnos });
+   resultArray = JSON.parse(JSON.stringify(alumnos));
+
+
+  var nombresCursos = []
+
+  for (i = 0; i < resultArray.length; i++) {
+    console.log(resultArray[i].id_curso)
+    nombre = await pool.query('SELECT nombre_curso FROM cursos WHERE id = ' + resultArray[i].id_curso);
+    nombresCursos.push(nombre)
+
+  }
+  for (i = 0; i < nombresCursos.length; i++) {
+    console.log(nombresCursos[i][0].nombre_curso)
+    resultArray[i].id_curso = nombresCursos[i][0].nombre_curso
+  }
+   res.render('crud_profe/alumnos/list',{ alumnos:resultArray});
  });
 
  router.get('/alumnos/delete/:id', async(req,res) => {

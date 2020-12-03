@@ -3,13 +3,13 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/administracion/unidades/edit/{{unidad.id}}" method="POST">
+                    <form action="/administracion/unidades/edit/{{unidad.id}}" method="POST"autocomplete="off">
                         <div class="form-group">
                             <input type="text" value = "{{unidad.nombre_unidad}}" name="nombre_unidad" class="form-control" placeholder="Nombre Unidad"
                                 autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{unidad.id_asignatura}}" name="id_asignatura" class="form-control" placeholder="ID Asignatura"
+                            <input type="text" readonly="readonly"  value = "{{unidad.id_asignatura}}" name="id_asignatura" class="form-control" placeholder="ID Asignatura"
                                 autofocus>
                         </div>
                         <div class="form-group">

@@ -3,7 +3,7 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/profesores/notas/add" method="POST">
+                    <form action="/profesores/notas/add" method="POST" autocomplete="off">
                         <h3 style="text-align:center">Agregar Nota Alumnno</h3>
                         <div class="form-group">
                             <input type="text" name="nombre_actividad" class="form-control" placeholder="Actividad"
@@ -13,10 +13,24 @@
                             <input type="text" name="clasificacion" class="form-control" placeholder="Nota" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="id_alumno" class="form-control" placeholder="Rut Alumno" autofocus>
+                            <input list="browsers" class="form-control" name="id_alumno" id="browser"
+                                placeholder="Alumno">
+                            <datalist id="browsers">
+                                {{#each alumnos}}
+                                <option value={{id}}-{{nombre_completo}}>
+                                    {{/each}}
+                            </datalist>
+                           
                         </div>
                         <div class="form-group">
-                            <input type="text" name="id_asignatura" class="form-control" placeholder="ID Asignatura" autofocus>
+                            <input list="browsers2" class="form-control" name="id_asignatura" id="browser2"
+                                placeholder="Asignatura">
+                            <datalist id="browsers2">
+                                {{#each asignaturas}}
+                                <option value={{id}}-{{nombre_asignatura}}>
+                                    {{/each}}
+                            </datalist>
+                            
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">

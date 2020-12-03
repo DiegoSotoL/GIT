@@ -3,22 +3,20 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/profesores/alumnos/edit/{{alumno.id}}" method="POST">
+                    <form action="/profesores/notas/edit/{{nota.id}}" method="POST"autocomplete="off">
                         <div class="form-group">
-                            <input type="text" value = "{{alumno.rut}}" name="rut" class="form-control" placeholder="Rut" autofocus>
+                            <input type="text" value = "{{nota.nombre_actividad}}" name="nombre_actividad" class="form-control" placeholder="Nombre actividad" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{alumno.nombre_completo}}" name="nombre_completo" class="form-control" placeholder="Nombre Completo" autofocus>
+                            <input type="text" value = "{{nota.clasificacion}}" name="clasificacion" class="form-control" placeholder="Nota" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{alumno.telefono}}" name="telefono" class="form-control" placeholder="Telefono" autofocus>
+                            <input type="text" readonly="readonly" value = "{{nota.id_alumno}}" name="id_alumno" class="form-control" placeholder="ID Alumno" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" value = "{{alumno.correo}}" name="correo" class="form-control" placeholder="Correo" autofocus>
+                            <input type="text" readonly="readonly" value = "{{nota.id_asignatura}}" name="id_asignatura" class="form-control" placeholder="ID Asignatura" autofocus>
                         </div>
-                        <div class="form-group">
-                            <input type="text" value = "{{alumno.id_curso}}" name="id_curso" class="form-control" placeholder="ID Curso" autofocus>
-                        </div>
+                        
                         <div class="form-group">
                             <button class="btn btn-success btn-block">
                                 Guardar

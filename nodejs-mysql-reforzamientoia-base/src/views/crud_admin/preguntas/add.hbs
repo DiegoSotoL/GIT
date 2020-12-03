@@ -3,7 +3,7 @@
         <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="cardbody">
-                    <form action="/administracion/preguntas/add" method="POST">
+                    <form action="/administracion/preguntas/add" method="POST"autocomplete="off">
                         <div class="form-group">
                             <input type="text" name="pregunta" class="form-control" placeholder="Pregunta"
                                 autofocus>
@@ -17,8 +17,14 @@
                                 autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="id_unidad" class="form-control" placeholder="ID Unidad"
-                                autofocus>
+                            <input list="browsers" class="form-control" name="id_unidad" id="browser"
+                                placeholder="Unidad">
+                            <datalist id="browsers">
+                                {{#each unidades}}
+                                <option value={{id}}-{{nombre_unidad}}>
+                                    {{/each}}
+                            </datalist>
+                            
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">
