@@ -1,3 +1,13 @@
+.contenedorList {
+	width: 1200px;
+	height: 700px;
+	margin: 5px auto;
+	padding: 10px;
+	background: #fff;
+	overflow: auto;
+	font-family: 'Open Sans';
+	border-radius: 2px;
+}
 .contenedor {
 	width: 1000px;
 	height: 800px;

@@ -6,11 +6,17 @@ const keys = require('../../apikeys/keys.json')
 const pool = require ('../database');
 const { isLoggedIn } = require('../lib/auth');
 const nodemailer = require("nodemailer");
+const Stopwatch = require('timer-stopwatch');
 var respuestas01, respuestas02, respuestas03, respuestas04, respuestas05;
 var resultados = [];
 var motivacionIntrinseca
 var creditosUsuario =0
-var rutUser = ''; 
+var rutUser = '';
+var stopwatchmod1 = new Stopwatch();
+var stopwatchmod2 = new Stopwatch();
+var stopwatchmod3 = new Stopwatch();
+var stopwatchsession = new Stopwatch();
+var user_id= 0
 const client = new google.auth.JWT(
    keys.client_email,
    null,
@@ -55,12 +61,22 @@ async function gsrun(client,rut){
 
 
 router.get('/inicio/:id', async (req, res) => {
+   user_id = req.user.id
+   stopwatchsession.start()
+   const rows = await pool.query('SELECT * FROM users WHERE id = '+req.user.id);
+   user = rows [0];
+   rutUser=user.rut
+   res.render('curso_alumno/pretest',{idUser : req.params.id});
+
+
+});
+router.get('/inicio/:id', async (req, res) => {
    
    
    const rows = await pool.query('SELECT * FROM users WHERE id = '+req.user.id);
    user = rows [0];
    rutUser=user.rut
-   res.render('curso_alumno/inicio',{idUser : req.params.id});
+   res.render('curso_alumno/pretest',{idUser : req.params.id});
 
 
 });
@@ -132,8 +148,8 @@ router.get('/tienda/canjear/:id', async(req,res) => {
    res.redirect('/alumnos/tienda') 
 });
 router.get('/modulo1-base/:id', async (req, res) => {
-   
-   
+   stopwatchmod1.start();
+   var puntosRonda
     console.log('rut: '+rutUser)
    sumaPuntajes =0
    var IMI = gsrun(client, rutUser).then(r =>{
@@ -215,12 +231,15 @@ router.get('/modulo1-base/:id', async (req, res) => {
    console.log('ejercicios1: ' + ejerciciostipo1)
    console.log('ejercicios2: ' + ejerciciostipo2)
    console.log('ejercicios3: ' + ejerciciostipo3)
+   console.log('acaaaaaaaaaaaaa')
 
 
    res.render('curso_alumno/modulo1-base', { ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2], restantes1: ejerciciostipo1, restantes2: ejerciciostipo2, restantes3: ejerciciostipo3 });
 
 });
 router.post('/modulo1-base', async (req, res) => {
+   var puntosRonda
+   
    const { r01, p01, r02, p02, r03, p03, restantes1, restantes2, restantes3 } = req.body;
    respuestas01 = {
       r01,
@@ -250,13 +269,14 @@ router.post('/modulo1-base', async (req, res) => {
       if (respuesta == respuestaBuena) {
          respuestasUser[tipo - 1] = true
          resultados.push([ejercicio, 1, true])
+         puntosRonda=puntosRonda+500
       } else {
          respuestasUser[tipo - 1] = false
          resultados.push([ejercicio, 1, false])
       }
 
    }
-   setTimeout(() => { console.log(respuestasUser) }, 000);
+   setTimeout(() => { console.log(respuestasUser) }, 1000);
 
    var view01, view02, view03
    function blockNone() {
@@ -306,16 +326,19 @@ router.post('/modulo1-base', async (req, res) => {
    console.log('RESTANTE1: ' + restantes3[0])
    console.log('RESTANTE2: ' + restantes3[2])
    restantes3segundo = restantes3[2]
-
+   
+   
    if (restantes3[2] == 1) {
       restantes3segundo = 10
    }
    setTimeout(() => { blockNone() }, 500);
    setTimeout(() => {
       if (respuestasUser.includes(false)) {
-         setTimeout(() => { res.render('curso_alumno/modulo1-adaptado', { result01: view01, result02: view02, result03: view03, rest1: restantes1[0], rest2: restantes2[0], rest3: restantes3[0], rest1b: restantes1[2], rest2b: restantes2[2], rest3b: restantes3segundo }) }, 1000);
+          setTimeout(() => { res.render('curso_alumno/modulo1-adaptado', {flashPuntos:puntosRonda, result01: view01, result02: view02, result03: view03, rest1: restantes1[0], rest2: restantes2[0], rest3: restantes3[0], rest1b: restantes1[2], rest2b: restantes2[2], rest3b: restantes3segundo }) }, 1000);
       } else {
-         res.render('curso_alumno/modulo2-1-base', { ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2] });
+         stopwatchmod1.stop();
+         console.log('tiempo en el modulo 1: '+stopwatch.ms)   
+         res.render('curso_alumno/modulo2-1-base', {ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2],flashPuntos:puntosRonda });
       }
    }, 500);
    setTimeout(() => { console.log(view01) }, 2000);
@@ -330,7 +353,9 @@ router.post('/modulo1-base', async (req, res) => {
 });
 /* acaaaaaaaaaaaa */
 router.post('/modulo1-adaptado', async (req, res) => {
-   const { r04, r04b, r05, r05b, r06, r06b, p04, p04b, p05, p05b, p06, p06b, responder1,responder2,responder3} = req.body;
+   
+   const { r04, r04b, r05, r05b, r06, r06b, p04, p04b, p05, p05b, p06, p06b, responder1,responder2,responder3,puntos} = req.body;
+   req.flash('success', 'Puntos: ' + puntos);
    respuestas02 = {
       r04,
       r04b,
@@ -346,8 +371,10 @@ router.post('/modulo1-adaptado', async (req, res) => {
       p06b,
       responder1,
       responder2,
-      responder3
+      responder3,
+      puntos
    };
+   req.flash('success', 'Puntos: ' + puntos);
    console.log(respuestas02);
    var respuestasUser = [false, false, false]
    if(responder1=='block'){
@@ -408,13 +435,15 @@ router.post('/modulo1-adaptado', async (req, res) => {
    console.log('ejercicios1: ' + ejerciciostipo1)
    console.log('ejercicios2: ' + ejerciciostipo2)
    console.log('ejercicios3: ' + ejerciciostipo3)
-
-   res.render('curso_alumno/modulo2-1-base', { ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2], restantes1: ejerciciostipo1, restantes2: ejerciciostipo2, restantes3: ejerciciostipo3 });
+   stopwatchmod1.stop();
+   console.log('tiempo en el modulo 1: '+stopwatchmod1.ms)  
+   res.render('curso_alumno/modulo2-1-base', {ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2], restantes1: ejerciciostipo1, restantes2: ejerciciostipo2, restantes3: ejerciciostipo3 });
 
 
 });
 /* acaaaaaaaaaaaaaaaa */
 router.post('/modulo2-1-base', async (req, res) => {
+   stopwatchmod2.start()
    const { r07, p07, r08, p08, r09, p09, restantes1, restantes2, restantes3 } = req.body;
    respuestas03 = {
       r07,
@@ -520,6 +549,8 @@ router.post('/modulo2-1-base', async (req, res) => {
       if (respuestasUser.includes(false)) {
          setTimeout(() => { res.render('curso_alumno/modulo2-1-adaptado', { result01: view01, result02: view02, result03: view03, rest1: restantes1[0], rest2: restantes2[0], rest3: restantes3[0], rest1b: restantes1[2], rest2b: restantes2[2], rest3b: restantes3segundo }) }, 500);
       } else {
+         stopwatchmod2.stop();
+         console.log('modulo 2 timer: '+stopwatchmod2.ms)
          res.render('curso_alumno/modulo2-2-base', { ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2] });
       }
    }, 500);
@@ -611,12 +642,15 @@ router.post('/modulo2-1-adaptado', async (req, res) => {
    console.log('ejercicios1: ' + ejerciciostipo1)
    console.log('ejercicios2: ' + ejerciciostipo2)
    console.log('ejercicios3: ' + ejerciciostipo3)
+   stopwatchmod2.stop();
+   console.log('modulo 2 timer: '+stopwatchmod2.ms)
 
    res.render('curso_alumno/modulo2-2-base', { ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2], restantes1: ejerciciostipo1, restantes2: ejerciciostipo2, restantes3: ejerciciostipo3 });
 
 
 });
 router.post('/modulo2-2-base', async (req, res) => {
+   stopwatchmod3.start();
    const { r13, p13, r14, p14, r15, p15, restantes1, restantes2, restantes3 } = req.body;
    respuestas03 = {
       r13,
@@ -684,7 +718,9 @@ router.post('/modulo2-2-base', async (req, res) => {
       if (respuestasUser.includes(false)) {
          setTimeout(() => { res.render('curso_alumno/modulo2-2-adaptado', { result01: view01, result02: view02, result03: view03, rest1: restantes1[0], rest2: restantes2[0], rest3: restantes3primero, rest1b: restantes1[2], rest2b: restantes2[2]}) }, 500);
       } else {
-         res.render('curso_alumno/resultados');
+         stopwatchmod3.stop();
+         console.log('modulo 3 timer: '+stopwatchmod3.ms)
+         res.render('curso_alumno/posttest', {puntos:puntosExtra,imi:motivacionIntrinseca});
       }
    }, 1000);
    setTimeout(() => { console.log(view01) }, 2000);
@@ -699,6 +735,7 @@ router.post('/modulo2-2-base', async (req, res) => {
 
 });
 router.post('/modulo2-2-adaptado', async (req, res) => {
+   var buenas=0, malas=0,modulo1buenas=0,modulo2buenas=0,modulo3buenas=0,modulo1malas=0,modulo2malas=0,modulo3malas=0
    var transporter = nodemailer.createTransport({
       host : 'smtp.gmail.com',
       post : 587,
@@ -715,7 +752,9 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       subject : "Resultados reforzamiento",
       text : "dasasdasd"
    }
-   
+   stopwatchmod3.stop();
+   stopwatchsession.stop();
+         console.log('modulo 3 timer: '+stopwatchmod3.ms)
    const { r16, r16b, r17, r17b, r18,p16, p16b, p17, p17b, p18,responder1,responder2,responder3} = req.body;
    respuestas06 = {
       r16,
@@ -732,6 +771,8 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       responder2,
       responder3
    };
+   
+   
    if(responder1=='block'){
       corregirModulo3(r16, p16, 1)
       corregirModulo3(r16b, p16b, 1)
@@ -770,7 +811,7 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
    setTimeout(() => { 
       for (i=0;i<resultados.length;i++){
          if(resultados[i][2]){
-            puntosExtra = puntosExtra+100
+            puntosExtra = puntosExtra+500
          }
       }
       puntos=puntos+puntosExtra
@@ -794,7 +835,7 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       }else{
          mailOptions.text=mailOptions.text.concat('El Alumno ha demostrado que su motivacion en el aula viene de agentes externos.\n')
       }
-      var buenas=0, malas=0,modulo1buenas=0,modulo2buenas=0,modulo3buenas=0
+      
       for (i=0;i<resultados.length;i++){
          if(resultados[i][2]){
            buenas++
@@ -810,6 +851,15 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
          if(resultados[i][2]&& resultados[i][1]==3){
             modulo3buenas++
          }
+         if(!resultados[i][2]&& resultados[i][1]==1){
+            modulo1malas++
+         }
+         if(!resultados[i][2]&& resultados[i][1]==2){
+            modulo2malas++
+         }
+         if(!resultados[i][2]&& resultados[i][1]==3){
+            modulo3malas++
+         }
         
       }
       mailOptions.text=mailOptions.text.concat('Resultados:\nEl estudiante de un total de '+resultados.length+' preguntas ha respondido '+buenas+' preguntas correctamente '+malas+' respuestas incorrectas.\nDe las '+buenas+' respuestas correctas '+modulo1buenas+' corresponden al primer modulo de la unidad "Patrones", '+modulo2buenas+' corresponde al segundo modulo "Resolucion de ecuaciones" y '+modulo3buenas+' corresponden al tercer modulo "Problemas de planteo".')
@@ -819,7 +869,9 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       console.log('mod2:'+modulo2buenas)
       console.log('mod3:'+modulo3buenas)
       
-       
+   
+      
+      
       
        transporter.sendMail(mailOptions, (error,info)=>{
       if(error){
@@ -830,7 +882,47 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       }
    })
    }, 3000);
-   setTimeout(() => { res.render('curso_alumno/resultados', {puntos:puntosExtra,imi:motivacionIntrinseca})}, 1000);
+   async function dataUser() {
+      const tiempo_mod1 = stopwatchmod1.ms
+      const tiempo_mod2 = stopwatchmod2.ms
+      const tiempo_mod3 = stopwatchmod3.ms
+      const tiempo_session = stopwatchsession.ms
+      const res_bue_mod1 = modulo1buenas
+      const res_bue_mod2 = modulo2buenas
+      const res_bue_mod3 = modulo3buenas
+      const res_mal_mod1 = modulo1malas
+      const res_mal_mod2 = modulo2malas
+      const res_mal_mod3 = modulo3malas
+      const id_user = user_id
+      const dataUser ={
+         tiempo_mod1,
+         tiempo_mod2,
+         tiempo_mod3,
+         tiempo_session,
+         res_bue_mod1,
+         res_bue_mod2,
+         res_bue_mod3,      
+         res_mal_mod1,
+         res_mal_mod2,
+         res_mal_mod3,
+         id_user
+      };
+      await pool.query('INSERT INTO data_user set ?', [dataUser]);   
+   }
+   
+   setTimeout(() => {dataUser()}, 4000);
+   setTimeout(() => { res.render('curso_alumno/posttest', {puntos:puntosExtra,imi:motivacionIntrinseca})}, 1000);
 });
+router.post('/resultados', async (req, res) => {
+   const { puntos, imi} = req.body;
+   
+   var imi2 = (imi === "true");
+   var puntos2 = parseInt(puntos)
+   console.log(puntos)
+   
+   res.render('curso_alumno/resultados',{puntos:puntos2,imi:imi2});
+   
+   
 
+});
 module.exports = router;

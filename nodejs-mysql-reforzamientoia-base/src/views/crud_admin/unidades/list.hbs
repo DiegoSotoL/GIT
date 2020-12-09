@@ -1,26 +1,30 @@
-<div class="container p-4">
-    <div class="row">
-        {{#each unidades}}
+<br>
+<h1 class="text-center">Unidades</h1>
+<div class="contenedorList">
+    <div class="container p-4">
+        <div class="row">
+            {{#each unidades}}
             <div class="col-md-4">
                 <div class="card text-center">
                     <div class="card-body">
-                        <h3 class = "card-title text-uppercase">
-                            {{nombre_unidad}}  
+                        <h3 class="card-title text-uppercase">
+                            {{nombre_unidad}}
                         </h3>
                         <p style="font-size:14px; color:#db330f">{{timeago fecha_creacion}}</p>
-                        <p class = "m-2">Asignatura: {{id_asignatura}}</p>
-                        <a href="/administracion/unidades/delete/{{id}}"class ="btn btn-danger">BORAR</a>
-                        <a href="/administracion/unidades/edit/{{id}}"class ="btn btn-secondary">EDITAR</a>
-                    </div>    
+                        <p class="m-2">Asignatura: {{id_asignatura}}</p>
+                        <a href="/administracion/unidades/delete/{{id}}" class="btn btn-danger">BORAR</a>
+                        <a href="/administracion/unidades/edit/{{id}}" class="btn btn-secondary">EDITAR</a>
+                    </div>
                 </div>
             </div>
-        {{else}}
+            {{else}}
             <div class="col-md-4 mx-auto">
                 <div class="card card-body text-center">
                     <p>NO HAY UNIDADES REGISTRADOS</p>
                     <a href="/administracion/unidades/add">REGISTRAR</a>
                 </div>
             </div>
-        {{/each}}
+            {{/each}}
+        </div>
     </div>
 </div>

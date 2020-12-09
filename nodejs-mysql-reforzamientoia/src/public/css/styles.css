@@ -8,6 +8,16 @@
 	font-family: 'Open Sans';
 	border-radius: 4px;
 }
+.contenedorList {
+	width: 1000px;
+	height: 1000px;
+	margin: 10px auto;
+	padding: 20px;
+	background: #fff;
+	overflow: auto;
+	font-family: 'Open Sans';
+	border-radius: 4px;
+}
 .scroll {
   overflow: auto;
 }
