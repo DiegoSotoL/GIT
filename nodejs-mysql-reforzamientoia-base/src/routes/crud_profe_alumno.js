@@ -64,6 +64,78 @@ router.get('/alumnos/edit/:id', async (req,res) => {
    console.log(alumnos[0]);
    res.render('crud_profe/alumnos/edit', {alumno : alumnos[0]});
 });
+router.get('/alumnos/performance/:id', async (req,res) => {
+   enero= []
+   febrero= []
+   marzo= []
+   abril= []
+   mayo= []
+   junio= []
+   julio= []
+   agosto= []
+   septiembre= []
+   octubre= []
+   noviembre= []
+   diciembre= []
+   console.log(req.params.nombre);
+   const { id } = req.params;
+   const alumnos = await pool.query('SELECT * FROM alumnos WHERE id = ?', [id] );
+   rutAlumno = alumnos[0].rut
+   const user = await pool.query('SELECT * FROM users WHERE rut = ?', [rutAlumno] );
+   idUser = user[0].id
+   const dataUser = await pool.query('SELECT * FROM data_user WHERE id_user = ?', [idUser] );
+   for(i=0;i<dataUser.length;i++){
+      console.log(dataUser[i].fecha_intento.getMonth())
+         if(dataUser[i].fecha_intento.getMonth()+1==1){
+            enero.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==2){
+            febrero.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==3){
+            marzo.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==4){
+            abril.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==5){
+            mayo.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==6){
+            junio.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==7){
+            julio.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==8){
+            agosto.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==9){
+            septiembre.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==10){
+            octubre.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==11){
+            noviembre.push(dataUser[i])
+         }
+         if(dataUser[i].fecha_intento.getMonth()+1==12){
+            diciembre.push(dataUser[i])            
+         }        
+         
+   }
+   eneroPasar = []
+   for (i=0;i<enero.length;i++){
+      mod1 = enero[i].res_bue_mod1
+      
+      respuestasBuenas = parseInt(enero[i].res_bue_mod1, 10)+parseInt(enero[i].res_bue_mod2, 10)+parseInt(enero[i].res_bue_mod3, 10)
+      eneroPasar.push({x:enero[i].fecha_intento.getDate(), y: respuestasBuenas}) 
+   }
+   console.log(enero[0].fecha_intento.getDate())
+   console.log(eneroPasar)
+   
+   res.render('crud_profe/alumnos/performance', {eneroPasar : eneroPasar});
+});
 router.get('/alumnos/addnota/:id', async (req,res) => {
    
    res.render('crud_profe/notas/list');

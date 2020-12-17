@@ -7,6 +7,8 @@ const pool = require ('../database');
 const { isLoggedIn } = require('../lib/auth');
 const nodemailer = require("nodemailer");
 const Stopwatch = require('timer-stopwatch');
+const { CanvasRenderService } = require('chartjs-node-canvas');
+var Chart = require('chart.js');
 var respuestas01, respuestas02, respuestas03, respuestas04, respuestas05;
 var resultados = [];
 var motivacionIntrinseca
@@ -337,7 +339,7 @@ router.post('/modulo1-base', async (req, res) => {
           setTimeout(() => { res.render('curso_alumno/modulo1-adaptado', {flashPuntos:puntosRonda, result01: view01, result02: view02, result03: view03, rest1: restantes1[0], rest2: restantes2[0], rest3: restantes3[0], rest1b: restantes1[2], rest2b: restantes2[2], rest3b: restantes3segundo }) }, 1000);
       } else {
          stopwatchmod1.stop();
-         console.log('tiempo en el modulo 1: '+stopwatch.ms)   
+         
          res.render('curso_alumno/modulo2-1-base', {ej1: ejerciciosbase[0], ej2: ejerciciosbase[1], ej3: ejerciciosbase[2],flashPuntos:puntosRonda });
       }
    }, 500);
@@ -735,6 +737,7 @@ router.post('/modulo2-2-base', async (req, res) => {
 
 });
 router.post('/modulo2-2-adaptado', async (req, res) => {
+   var resul = []
    var buenas=0, malas=0,modulo1buenas=0,modulo2buenas=0,modulo3buenas=0,modulo1malas=0,modulo2malas=0,modulo3malas=0
    var transporter = nodemailer.createTransport({
       host : 'smtp.gmail.com',
@@ -865,6 +868,9 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
       mailOptions.text=mailOptions.text.concat('Resultados:\nEl estudiante de un total de '+resultados.length+' preguntas ha respondido '+buenas+' preguntas correctamente '+malas+' respuestas incorrectas.\nDe las '+buenas+' respuestas correctas '+modulo1buenas+' corresponden al primer modulo de la unidad "Patrones", '+modulo2buenas+' corresponde al segundo modulo "Resolucion de ecuaciones" y '+modulo3buenas+' corresponden al tercer modulo "Problemas de planteo".')
       console.log('buenas:'+buenas)
       console.log('malas:'+malas)
+      resul[0] = buenas
+      resul[1]= malas
+
       console.log('mod1:'+modulo1buenas)
       console.log('mod2:'+modulo2buenas)
       console.log('mod3:'+modulo3buenas)
@@ -915,12 +921,22 @@ router.post('/modulo2-2-adaptado', async (req, res) => {
 });
 router.post('/resultados', async (req, res) => {
    const { puntos, imi} = req.body;
-   
+   var buenas=0
+   var malas=0
+   var resultados2 = resultados
    var imi2 = (imi === "true");
    var puntos2 = parseInt(puntos)
-   console.log(puntos)
+   for (i=0;i<resultados.length;i++){
+      if(resultados[i][2]){
+        buenas++
+      }else{
+         malas++ 
+      }
+
+   }
+
    
-   res.render('curso_alumno/resultados',{puntos:puntos2,imi:imi2});
+   res.render('curso_alumno/resultados',{puntos:puntos2,imi:imi2,buenas:buenas,malas:malas});
    
    
 

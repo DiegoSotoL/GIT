@@ -1,0 +1,248 @@
+<br>
+<h4 class="text-center">Grafico de desempeño semestral estudiante</h4>
+
+<div class="wrapper">
+<button class="btn btn-primary" style="margin: 10px" type="button" data-toggle="collapse"
+    data-target="#collapsePrimerSemestre" aria-expanded="false" aria-controls="collapsePrimerSemestre">
+    Primer Semestre
+</button>
+
+<button class="btn btn-primary" style="margin: 10px" type="button" data-toggle="collapse"
+    data-target="#collapseSegundoSemestre" aria-expanded="false" aria-controls="collapseSegundoSemestre">
+    Segundo Semestre
+</button>    
+</div>
+
+
+
+
+<div class="contenedorChart2">
+
+
+    <div class="collapse" id="collapsePrimerSemestre">
+        <div class="card-body">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+            <div class=" text-center">
+                <h4>Primer Semestre</h4>
+            </div>
+            <canvas id="myChart" width="10" height="10"></canvas>
+
+            <script>
+
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var marzo = {
+                    label: "Marzo",
+                    data: [{ x: 14, y: 03 }, { x: 21, y: 03 }, { x: 30, y: 04 }],
+
+                    lineTension: 0.3,
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'red'
+
+                    // Set More Options
+                };
+
+
+                var abril = {
+                    label: "Abril",
+                    data: [{ x: 3, y: 05 }, { x: 14, y: 06 }, { x: 25, y: 06 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'blue'
+
+                    // Set More Options
+                };
+                var mayo = {
+                    label: "Mayo",
+                    data: [{ x: 10, y: 06 }, { x: 21, y: 07 }, { x: 26, y: 08 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'green'
+
+                    // Set More Options
+                };
+                var junio = {
+                    label: "Junio",
+                    data: [{ x: 5, y: 08 }, { x: 20, y: 08 }, { x: 30, y: 09 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'orange'
+
+                    // Set More Options
+                };
+                var julio = {
+                    label: "Julio",
+                    data: [{ x: 5, y: 09 }, { x: 14, y: 10 }, { x: 25, y: 10 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'black'
+
+                    // Set More Options
+                };
+
+                var speedData = {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+                    datasets: [marzo, abril, mayo, junio, julio],
+                    xAxisID: 'Dia',
+                    yAxisID: 'Respuestas Correctas'
+                };
+
+                var chartOptions = {
+                    scales: {
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'respuestas correctas'
+                            },
+                            ticks: {
+                                max: 11,
+                                min: 2
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'dias'
+                            },
+                            ticks: {
+                                max: 31,
+                                min: 1
+                            }
+                        }]
+
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            boxWidth: 80,
+                            fontColor: 'black'
+                        }
+                    }
+                };
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: speedData,
+                    options: chartOptions
+                });
+            </script>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseSegundoSemestre">
+        <div class="card-body">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+            <div class=" text-center">
+                <h4>Segundo Semestre</h4>
+            </div>
+            <canvas id="myChart2" width="10" height="10"></canvas>
+
+            <script>
+
+                var ctx = document.getElementById("myChart2").getContext("2d");
+                var agosto = {
+                    label: "Agosto",
+                    data: [{ x: 14, y: 10 }, { x: 21, y: 11 }, { x: 30, y: 11 }],
+
+                    lineTension: 0.3,
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'red'
+
+                    // Set More Options
+                };
+
+
+                var septiembre = {
+                    label: "Septiembre",
+                    data: [{ x: 3, y: 12 }, { x: 14, y: 12 }, { x: 25, y: 13 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'blue'
+
+                    // Set More Options
+                };
+                var octubre = {
+                    label: "Octubre",
+                    data: [{ x: 10, y: 14 }, { x: 21, y: 15 }, { x: 26, y: 16 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'green'
+
+                    // Set More Options
+                };
+                var noviembre = {
+                    label: "Noviembre",
+                    data: [{ x: 5, y: 16 }, { x: 20, y: 16 }, { x: 30, y: 16 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'orange'
+
+                    // Set More Options
+                };
+                var diciembre = {
+                    label: "Diciembre",
+                    data: [{ x: 5, y: 17 }, { x: 14, y: 18 }, { x: 25, y: 20 }],
+                    showLines: true,
+                    fill: false,
+                    borderColor: 'black'
+
+                    // Set More Options
+                };
+
+                var speedData = {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+                    datasets: [agosto, septiembre, octubre, noviembre, diciembre],
+                    xAxisID: 'Dia',
+                    yAxisID: 'Respuestas Correctas'
+                    
+                };
+
+                var chartOptions = {
+                    scales: {
+                        yAxes: [{
+                            
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'respuestas correctas'
+                            },
+                            ticks: {
+                                max: 21,
+                                min: 09
+                            }
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'dias'
+                                
+                            },
+                            ticks: {
+                                max: 31,
+                                min: 1
+                            }
+                        }]
+
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            boxWidth: 80,
+                            fontColor: 'black'
+                        }
+                    }
+                };
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: speedData,
+                    options: chartOptions
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div class=" text-center">
+    <a href="/profesores/alumnos" class="btn btn-primary text-center">Volver</a>
+</div>

@@ -1,24 +1,62 @@
-
 <div class="body p-4">
     <div class="row">
         <div class="col-md-4 mx-auto">
             <div class="card text-center">
                 <div class="card-body">
                     {{#ifEquals imi false}} {{!-- administrador --}}
-                    <h4>¡Felicitaciones! Has finalizado el reforzamiento. ¡En el proceso has conseguido un total de {{puntos}} puntos! Visita la tienda para ver cómo puedes gastar estos puntos 😊</h4>
+                    <h4>¡Felicitaciones! Has finalizado el reforzamiento. ¡En el proceso has conseguido un total de
+                        {{puntos}} puntos! Visita la tienda para ver cómo puedes gastar estos puntos 😊</h4>
                     <a href="/alumnos/tienda" class="btn btn-primary m-4">
-                        
+
                         Tienda
                     </a>
                     {{/ifEquals}}
                     {{#ifEquals imi true}} {{!-- administrador --}}
-                    <h4>¡Felicitaciones! Has finalizado el reforzamiento. Para que sigas explorando el mundo de las matematica aqui te dejo algunos enlaces 😊</h4>
-                    <a href="https://www.youtube.com/watch?v=Rx4UF7OasKA" class="btn btn-primary m-2"target="_blank">Matematicas en la vida cotidiana</a>
-                    <a href="https://www.youtube.com/watch?v=wiyTMoDETu4" class="btn btn-primary m-2"target="_blank">Resolucion de ecuaciones</a>
-                    <a href="https://www.youtube.com/watch?v=HJR4dSMx5Xc" class="btn btn-primary m-2"target="_blank">Patrones</a>                  
+                    <h4>¡Felicitaciones! Has finalizado el reforzamiento. Para que sigas explorando el mundo de las
+                        matematica aqui te dejo algunos enlaces 😊</h4>
+                    <a href="https://www.youtube.com/watch?v=Rx4UF7OasKA" class="btn btn-primary m-2"
+                        target="_blank">Matematicas en la vida cotidiana</a>
+                    <a href="https://www.youtube.com/watch?v=wiyTMoDETu4" class="btn btn-primary m-2"
+                        target="_blank">Resolucion de ecuaciones</a>
+                    <a href="https://www.youtube.com/watch?v=HJR4dSMx5Xc" class="btn btn-primary m-2"
+                        target="_blank">Patrones</a>
                     {{/ifEquals}}
-                    
 
+
+                </div>
+                
+
+            </div>
+            
+            
+            <div class = "contenedorChart">
+                
+                <h4 class="text-center">Grafico de desempeño</h4>
+                <div class="card-body">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+                    <canvas id="myChart" width="10" height="10"></canvas>
+                
+                    <script>
+                        var ctx = document.getElementById("myChart").getContext("2d");
+                        var myChart = new Chart(ctx, {
+                            type: "pie",
+                            data: {
+                                labels: ['Correctas', 'Incorrectas'],
+                                datasets: [{
+                                    label: 'Num datos',
+                                    data: [{{buenas}}, {{malas}}],
+                                    backgroundColor: [
+                                        'rgb(66, 134, 244,0.5)',
+                                        'rgb(74, 135, 72,0.5)',
+                                        'rgb(229, 89, 50,0.5)'
+                                    ]
+                                }]
+                            },
+                            options: {
+                                
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
