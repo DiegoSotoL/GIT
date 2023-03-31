@@ -6,24 +6,24 @@ const { dirname } = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session');
-const { database } = require('./keys');
-const passport = require('passport');
+/* const { database } = require('./keys');
+ */const passport = require('passport');
 const { truncateSync } = require('fs');
 const app = express(); 0
 const { format } = require('timeago.js');
 const Speaker = require('speaker');
-const texttospech = require('./texttospech');
-const router = express.Router();
+/* const texttospech = require('./texttospech');
+ */const router = express.Router();
 var myUrlBienvenida = '';
 var myUrlPregunta1 = '';
 var myUrlPregunta2 = '';
-const { Storage } = require('@google-cloud/storage');
+/* const { Storage } = require('@google-cloud/storage');
 const storage = new Storage({
     keyFilename: path.join(__dirname, '../apikeys/reforzamientoalgebraia-017aa4b76248.json'),
     projectId: 'reforzamientoalgebraia'
-});
-const audioaibucket = storage.bucket('audios-ai');
-
+}); */
+/* const audioaibucket = storage.bucket('audios-ai');
+ */
 
 
 
@@ -145,8 +145,8 @@ app.use(session({
     secret: 'mysqlnodemysql',
     resave: false,
     saveUninitialized: false,
-    store: new MySQLStore(database)
-}));
+/*     store: new MySQLStore(database)
+ */}));
 app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));

@@ -1,4 +1,4 @@
-const x = async function textoavoz(){
+/* const x = async function textoavoz(){
 const recorder = require('node-record-lpcm16');
 
 // Imports the Google Cloud client library
@@ -7,9 +7,7 @@ const speech = require('@google-cloud/speech');
 // Creates a client
 const client = new speech.SpeechClient();
 
-/**
- * TODO(developer): Uncomment the following lines before running the sample.
- */
+
 // const encoding = 'Encoding of the audio file, e.g. LINEAR16';
 // const sampleRateHertz = 16000;
 // const languageCode = 'BCP-47 language code, e.g. en-US';
@@ -57,3 +55,4 @@ console.log('Listening, press Ctrl+C to stop.');
 x();
 
 
+ */

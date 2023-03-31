@@ -1,4 +1,4 @@
-const textToSpeech = require('@google-cloud/text-to-speech');
+/* const textToSpeech = require('@google-cloud/text-to-speech');
 const path = require('path');
 const { Storage } = require('@google-cloud/storage');
 const storage = new Storage({
@@ -43,4 +43,4 @@ return Promise.resolve(file.getSignedUrl(config));
 x('Cuándo realizas ejercicios matemáticos, ¿sientes que tienes un mejor desempeño que el resto de los estudiantes?');
 
 
-module.exports = { x, y };
+module.exports = { x, y }; */
