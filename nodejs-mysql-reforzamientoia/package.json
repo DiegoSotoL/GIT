@@ -23,12 +23,10 @@
     "handlebars-helper-equal": "^1.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "naudiodon": "^2.2.4",
     "node-record-lpcm16": "^1.0.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sox": "^0.1.0",
-    "speaker": "^0.5.2",
     "swig": "^1.4.2",
     "timeago.js": "^4.0.2"
   },

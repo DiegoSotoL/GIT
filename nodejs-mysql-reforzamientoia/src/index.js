@@ -11,7 +11,6 @@ const MySQLStore = require('express-mysql-session');
 const { truncateSync } = require('fs');
 const app = express(); 0
 const { format } = require('timeago.js');
-const Speaker = require('speaker');
 /* const texttospech = require('./texttospech');
  */const router = express.Router();
 var myUrlBienvenida = '';
