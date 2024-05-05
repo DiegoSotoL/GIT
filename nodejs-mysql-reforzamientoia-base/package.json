@@ -18,7 +18,7 @@
     "chartjs-node-canvas": "^3.0.6",
     "connect-flash": "^0.1.1",
     "consolidate": "^0.16.0",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "dynamic-avatar-drawer": "^1.31.9",
     "ember-truth-helpers": "^2.1.0",
     "express": "^4.17.1",
